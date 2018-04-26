@@ -10,14 +10,17 @@
 #import "MMCollectionViewCell.h"
 #import "MMParserRSS.h"
 #import "MMElementRSS.h"
-
+#import "MMFullElementRSS.h"
+#import "MMViewController.h"
 
 @interface MMCollectionViewController () {
-    NSMutableArray * RSSdata;
+    NSMutableArray * rssData;
+    NSURL          *url;
 }
 
 @property (nonatomic, strong) dispatch_queue_t someSerialQueue;
 @property (nonatomic, strong) NSMutableDictionary *imagesByURL;
+@property (nonatomic, strong) MMFullElementRSS *fullElement;
 
 @end
 
@@ -26,16 +29,13 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (IBAction)refresh:(UIBarButtonItem *)sender {
-    RSSdata = [NSMutableArray new];
-    [self reloadData];
-}
-
-- (IBAction)add:(UIBarButtonItem *)sender {
+- (IBAction)addButtonWasTaped:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Add tape" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* actionGo = [UIAlertAction actionWithTitle:@"Go"
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                           self->url = [NSURL URLWithString:alertVC.textFields[0].text];
+                                                           [self reloadDataWithURL:self->url];
                                                        }];
     
     UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
@@ -50,12 +50,59 @@ static NSString * const reuseIdentifier = @"Cell";
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (IBAction)refreshButtonWasTaped:(UIBarButtonItem *)sender {
+    rssData = [NSMutableArray new];
+    [self reloadDataWithURL:url];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showMore"]) {
+        MMViewController *fullItemVC = [segue destinationViewController];
+        NSLog(@"send");
+        
+        fullItemVC.fullElement = self.fullElement;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    MMElementRSS *element;
+    UIImage *img;
+    
+    if (indexPath.row < [rssData count]) {
+        element = [rssData objectAtIndex:indexPath.row];
+        NSURL *url = element.imageURL;
+        
+        if (url) {
+            img = [self.imagesByURL valueForKey:url.absoluteString];
+        }
+    }
+    
+    self.fullElement.element = element;
+    self.fullElement.elementImage = img;
+    
+    //self.fullElement = [MMFullElementRSS createFullElementWithElement:element andImage:img];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RSSdata = [NSMutableArray new];
+    self.fullElement = [MMFullElementRSS new];
     
-    [self reloadData];
+    url = [NSURL URLWithString:@"https://habrahabr.ru/rss/interesting/"];
+    UIRefreshControl *refreshController = [UIRefreshControl new];
+    
+    refreshController.backgroundColor = [UIColor redColor];
+    refreshController.tintColor       = [UIColor whiteColor];
+    [refreshController addTarget:self action:@selector(refreshWasPulled:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:refreshController];
+    
+    rssData = [NSMutableArray new];
+    [self reloadDataWithURL:url];
+}
+
+- (void)refreshWasPulled:(UIRefreshControl *)refreshController {
+    [self reloadDataWithURL:url];
+    [refreshController endRefreshing];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -74,19 +121,20 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-- (void)reloadData {
+- (void)reloadDataWithURL:(NSURL *)url {
+    // FUCKING SHIT //
+    self.imagesByURL = [NSMutableDictionary new];
+    [self updateVisibleCellsImages];
+    /////////////////
+    
     MMParserRSS *parser = [MMParserRSS new];
     
-    NSURLSession *session;
-    session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSURL * url = [NSURL URLWithString:@"https://habrahabr.ru/rss/interesting/"];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [parser setData:data];
-        self->RSSdata = [parser parsedItems];
+        self->rssData = [parser parsedItems];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateVisibleCellsImages];
             [self.collectionView reloadData];
         });
     }];
@@ -100,18 +148,23 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return RSSdata.count;
+    return rssData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.picture.image = nil;
 
+    if (indexPath.row >= [rssData count]) {
+        return cell;
+    }
+    
     cell.delegate = self;
     
-    MMElementRSS *element = [RSSdata objectAtIndex:indexPath.row];
+    MMElementRSS *element = [rssData objectAtIndex:indexPath.row];
     cell.title.text = [element.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     cell.date.text  = [element.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    cell.url        = element.image;
+    cell.url        = element.imageURL;
     
     [cell loadImageFromMemory];
     [cell setCurrentImage];
@@ -140,7 +193,6 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.imagesByURL setValue:img forKey:url.absoluteString];
         return img;
     }
-    
     return [UIImage imageNamed:@"Marty"];
 }
 

@@ -13,15 +13,27 @@
 @synthesize url;
 
 - (void)loadImageFromNet {
-    self.img = [_delegate imageByURL:self.url uisngNet:YES];
+    NSURL *urlToLoad = [self.url copy];
+    UIImage *imgToLoad = [_delegate imageByURL:self.url uisngNet:YES];
+    
+    if (urlToLoad == self.url) {
+        self.img = imgToLoad;
+    }
 }
 
 - (void)loadImageFromMemory {
-    self.img = [_delegate imageByURL:self.url uisngNet:NO];
+    NSURL *urlToLoad = [self.url copy];
+    UIImage *imgToLoad = [_delegate imageByURL:self.url uisngNet:NO];
+    
+    if (urlToLoad == self.url) {
+        self.img = imgToLoad;
+    }
 }
 
 - (void)setCurrentImage {
-    self.picture.image = self.img;
+    if (self.img) {
+        self.picture.image = self.img;
+    }
 }
 
 @end

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMCollectionViewCell.h"
 
-@interface MMCollectionViewController : UICollectionViewController <MMControllerViewCell>
-
-- (UIImage *)imageByURL:(NSURL *)url uisngNet:(BOOL)net;
+@interface MMCollectionViewController : UICollectionViewController <ImageLoading>
 
 @end
 

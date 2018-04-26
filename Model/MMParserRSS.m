@@ -14,8 +14,12 @@
     BOOL              _updated;
     NSMutableArray  * _arrXMLData;
     NSMutableString * _strXMLString;
-    MMElementRSS    * _elementRSS;
     NSData          * _data;
+    
+    NSURL           * _imageURL;
+    NSString        * _title;
+    NSString        * _description;
+    NSString        * _date;
 }
 
 @end
@@ -67,7 +71,7 @@
     [scanner scanUpToString:@"]]>" intoString:nil];
 
     if (imageString) {
-        _elementRSS.image = [NSURL URLWithString:imageString];
+        _imageURL = [NSURL URLWithString:imageString];
     }
 }
 
@@ -77,7 +81,10 @@
     if ([elementName isEqualToString:@"rss"]) {
         _arrXMLData = [[NSMutableArray alloc] init];
     } else if ([elementName isEqualToString:@"item"]) {
-        _elementRSS = [MMElementRSS new];
+        _title       = nil;
+        _description = nil;
+        _date        = nil;
+        _imageURL    = nil;
     }
 }
 
@@ -91,16 +98,17 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"title"]) {
-        _elementRSS.title = _strXMLString;
+        _title = _strXMLString;
     }
     if ([elementName isEqualToString:@"pubDate"]) {
-        _elementRSS.date = _strXMLString;
+        _date = _strXMLString;
     }
     if ([elementName isEqualToString:@"description"]) {
+        _description = _strXMLString;
         [self scaneDescriptionForImage];
     }
     if ([elementName isEqualToString:@"item"]) {
-        [_arrXMLData addObject:_elementRSS];
+        [_arrXMLData addObject:[MMElementRSS createElementWithTitle:_title description:_description  date:_date andImageUrl:_imageURL]];
     }
     _strXMLString = nil;
 }

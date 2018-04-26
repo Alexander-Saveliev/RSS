@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol MMControllerViewCell;
+@protocol ImageLoading;
 
 @interface MMCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) id <MMControllerViewCell> delegate;
+- (void)loadImageFromNet;
+- (void)loadImageFromMemory;
+- (void)setCurrentImage;
 
+@property (weak, nonatomic) id <ImageLoading> delegate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
 @property (weak, nonatomic) IBOutlet UILabel     *title;
@@ -22,13 +25,9 @@
 @property UIImage *img;
 @property NSURL   *url;
 
-- (void)loadImageFromNet;
-- (void)loadImageFromMemory;
-- (void)setCurrentImage;
-
 @end
 
-@protocol MMControllerViewCell <NSObject>
+@protocol ImageLoading <NSObject>
 
 - (UIImage *)imageByURL:(NSURL *)url uisngNet:(BOOL)net;
 
