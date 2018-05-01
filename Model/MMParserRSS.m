@@ -16,10 +16,16 @@
     NSMutableString * _strXMLString;
     NSData          * _data;
     
-    NSURL           * _imageURL;
-    NSString        * _title;
-    NSString        * _description;
-    NSString        * _date;
+    NSString * _channelTitle;
+    NSURL    * _channelLink;
+    NSString * _channelDescription;
+    
+    
+    NSString * _title;
+    NSString * _description;
+    NSURL    * _link;
+    NSURL    * _imageURL;
+    NSString * _date;
 }
 
 @end
@@ -62,17 +68,25 @@
     _inProcess = NO;
 }
 
-- (void)scaneDescriptionForImage {
-    NSScanner *scanner = [NSScanner scannerWithString:_strXMLString];
-    NSString *imageString;
-    [scanner scanUpToString:@"img src=\"" intoString:nil];
+- (NSString *)scaneDescriptionForImage {
+    NSString * withoutImage = @"";
+    NSString * buffer       = @"";
+    
+    NSScanner * scanner = [NSScanner scannerWithString:_strXMLString];
+    NSString * imageString;
+    [scanner scanUpToString:@"img src=\"" intoString:&withoutImage];
     [scanner scanString:@"img src=\"" intoString:nil];
     [scanner scanUpToString:@"\"" intoString:&imageString];
-    [scanner scanUpToString:@"]]>" intoString:nil];
+    [scanner scanString:@"\"" intoString:nil];
+    [scanner scanUpToString:@"]]>" intoString:&buffer];
 
     if (imageString) {
         _imageURL = [NSURL URLWithString:imageString];
     }
+    
+    NSString * result = [withoutImage stringByAppendingString:buffer];
+    
+    return result;
 }
 
 #pragma mark - Delegate
@@ -80,37 +94,65 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     if ([elementName isEqualToString:@"rss"]) {
         _arrXMLData = [[NSMutableArray alloc] init];
-    } else if ([elementName isEqualToString:@"item"]) {
+    }
+    if ([elementName isEqualToString:@"item"]) {
         _title       = nil;
         _description = nil;
         _date        = nil;
+        _link        = nil;
         _imageURL    = nil;
+        _strXMLString = nil;
     }
+    if ([elementName isEqualToString:@"enclosure"]) {
+        NSString *imageString = [attributeDict valueForKey:@"url"];
+        if (imageString) {
+            _imageURL = [NSURL URLWithString:imageString];
+        }
+    }
+    if ([elementName isEqualToString:@"media:content"]) {
+        NSString *imageString = [attributeDict valueForKey:@"url"];
+        if (imageString) {
+            _imageURL = [NSURL URLWithString:imageString];
+        }
+    }
+    _strXMLString = nil;
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!_strXMLString) {
-        _strXMLString = [[NSMutableString alloc] initWithString:string];
-    } else {
-        [_strXMLString appendString:string];
+        _strXMLString = [[NSMutableString alloc] init];
     }
+    [_strXMLString appendString:string];    
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"title"]) {
-        _title = _strXMLString;
+        if (!_channelTitle) {
+            _channelTitle = _strXMLString;
+        } else {
+            _title = _strXMLString;
+        }
     }
     if ([elementName isEqualToString:@"pubDate"]) {
         _date = _strXMLString;
     }
+    if ([elementName isEqualToString:@"link"]) {
+        if (!_channelLink) {
+            _channelLink = [NSURL URLWithString:_strXMLString];
+        } else {
+            _link = [NSURL URLWithString:_strXMLString];
+        }
+    }
     if ([elementName isEqualToString:@"description"]) {
-        _description = _strXMLString;
-        [self scaneDescriptionForImage];
+        if (!_channelDescription) {
+            _channelDescription = _strXMLString;
+        } else {
+            _description = [self scaneDescriptionForImage];
+        }
     }
     if ([elementName isEqualToString:@"item"]) {
-        [_arrXMLData addObject:[MMElementRSS createElementWithTitle:_title description:_description  date:_date andImageUrl:_imageURL]];
+        [_arrXMLData addObject:[MMElementRSS createElementWithTitle:_title description:_description  date:_date link:_link andImageUrl:_imageURL]];
     }
-    _strXMLString = nil;
 }
 
 @end

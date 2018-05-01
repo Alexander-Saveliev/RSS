@@ -10,11 +10,12 @@
 
 @interface MMElementRSS : NSObject
 
-+ (instancetype)createElementWithTitle:(NSString *)title description:(NSString *)description date:(NSString *)date andImageUrl:(NSURL *)imageUrl;
++ (instancetype)createElementWithTitle:(NSString *)title description:(NSString *)description date:(NSString *)date link:(NSURL *)link andImageUrl:(NSURL *)imageUrl;
 
 @property (readonly) NSString *title;
 @property (readonly) NSString *description;
 @property (readonly) NSString *date;
 @property (readonly) NSURL    *imageURL;
+@property (readonly) NSURL    *link;
 
 @end

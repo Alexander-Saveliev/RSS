@@ -15,7 +15,7 @@
 
 @interface MMCollectionViewController () {
     NSMutableArray * rssData;
-    NSURL          *url;
+    NSURL          * url;
 }
 
 @property (nonatomic, strong) dispatch_queue_t someSerialQueue;
@@ -79,14 +79,23 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.fullElement.element = element;
     self.fullElement.elementImage = img;
-    
-    //self.fullElement = [MMFullElementRSS createFullElementWithElement:element andImage:img];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.fullElement = [MMFullElementRSS new];
+    
+    // https://lenta.ru/rss/news
+    // https://habrahabr.ru/rss/interesting/
+    // http://kino-2017.net/novosti/rss.xml
+    // http://www.arms-expo.ru/news/rss/
+    // http://www.forbes.com/investing/feed2/
+    // http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml
+    // http://news.mail.ru/rss/91/
+    // !!! https://rss.itunes.apple.com/api/v1/jp/books/top-free/all/100/non-explicit.atom?at=1001l5Uo
+    // this shit sends empty image url http://botanicheskiy-rai.ru/rss.xml
+    // http://www.vedomosti.ru/rss/news
     
     url = [NSURL URLWithString:@"https://habrahabr.ru/rss/interesting/"];
     UIRefreshControl *refreshController = [UIRefreshControl new];
@@ -122,10 +131,11 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)reloadDataWithURL:(NSURL *)url {
-    // FUCKING SHIT //
+    
+#ifdef DEBUG
     self.imagesByURL = [NSMutableDictionary new];
     [self updateVisibleCellsImages];
-    /////////////////
+#endif
     
     MMParserRSS *parser = [MMParserRSS new];
     
@@ -141,7 +151,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [task resume];
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - UICollectionViewDataSource -
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -202,6 +212,8 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     return _someSerialQueue;
 }
+
+#pragma mark - lazy -
 
 - (NSMutableDictionary *)imagesByURL {
     if (!_imagesByURL) {

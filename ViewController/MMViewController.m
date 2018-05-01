@@ -20,10 +20,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[fullElement.element.description dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+
+    
     titleLabel.text       = fullElement.element.title;
-    descriptionLabel.text = fullElement.element.description;
+    descriptionLabel.attributedText = attrStr;
     pubDateLabel.text     = fullElement.element.date;
     image.image           = fullElement.elementImage;
+}
+
+- (IBAction)redirectButtonWasTaped:(UIButton *)sender {
+    if (fullElement.element.link) {
+        [[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:nil];
+        //[[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:^(BOOL success) {}];
+    } else {
+        NSLog(@"lol");
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
