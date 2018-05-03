@@ -32,6 +32,16 @@
 
 @implementation MMParserRSS
 
+static NSString * const rss         = @"rss";
+static NSString * const item        = @"item";
+static NSString * const enclosure   = @"enclosure";
+static NSString * const title       = @"title";
+static NSString * const pubDate     = @"pubDate";
+static NSString * const linkRSS     = @"link";
+static NSString * const description = @"description";
+static NSString * const url         = @"url";
+static NSString * const media       = @"media:content";
+
 - (instancetype)init {
     if (self = [super init]) {
         _inProcess = NO;
@@ -92,10 +102,10 @@
 #pragma mark - Delegate
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-    if ([elementName isEqualToString:@"rss"]) {
+    if ([elementName isEqualToString:rss]) {
         _arrXMLData = [[NSMutableArray alloc] init];
     }
-    if ([elementName isEqualToString:@"item"]) {
+    if ([elementName isEqualToString:item]) {
         _title       = nil;
         _description = nil;
         _date        = nil;
@@ -103,14 +113,14 @@
         _imageURL    = nil;
         _strXMLString = nil;
     }
-    if ([elementName isEqualToString:@"enclosure"]) {
-        NSString *imageString = [attributeDict valueForKey:@"url"];
+    if ([elementName isEqualToString:enclosure]) {
+        NSString *imageString = [attributeDict valueForKey:url];
         if (imageString) {
             _imageURL = [NSURL URLWithString:imageString];
         }
     }
-    if ([elementName isEqualToString:@"media:content"]) {
-        NSString *imageString = [attributeDict valueForKey:@"url"];
+    if ([elementName isEqualToString:media]) {
+        NSString *imageString = [attributeDict valueForKey:url];
         if (imageString) {
             _imageURL = [NSURL URLWithString:imageString];
         }
@@ -126,31 +136,27 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"title"]) {
+    if ([elementName isEqualToString:title]) {
         if (!_channelTitle) {
             _channelTitle = _strXMLString;
         } else {
             _title = _strXMLString;
         }
-    }
-    if ([elementName isEqualToString:@"pubDate"]) {
+    } else if ([elementName isEqualToString:pubDate]) {
         _date = _strXMLString;
-    }
-    if ([elementName isEqualToString:@"link"]) {
+    } else if ([elementName isEqualToString:linkRSS]) {
         if (!_channelLink) {
             _channelLink = [NSURL URLWithString:_strXMLString];
         } else {
             _link = [NSURL URLWithString:_strXMLString];
         }
-    }
-    if ([elementName isEqualToString:@"description"]) {
+    } else if ([elementName isEqualToString:description]) {
         if (!_channelDescription) {
             _channelDescription = _strXMLString;
         } else {
             _description = [self scaneDescriptionForImage];
         }
-    }
-    if ([elementName isEqualToString:@"item"]) {
+    } else if ([elementName isEqualToString:item]) {
         [_arrXMLData addObject:[MMElementRSS createElementWithTitle:_title description:_description  date:_date link:_link andImageUrl:_imageURL]];
     }
 }

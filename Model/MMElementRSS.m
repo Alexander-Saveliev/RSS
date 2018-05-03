@@ -10,6 +10,12 @@
 
 @implementation MMElementRSS
 
+@synthesize title       = _title;
+@synthesize description = _description;
+@synthesize date        = _date;
+@synthesize imageURL    = _imageURL;
+@synthesize link        = _link;
+
 + (instancetype)createElementWithTitle:(NSString *)title description:(NSString *)description date:(NSString *)date link:(NSURL *)link andImageUrl:(NSURL *)imageUrl {
     MMElementRSS *rssElement = [MMElementRSS new];
     [rssElement loadWithTitle:title description:description date:date link:link andImageUrl:imageUrl];
@@ -24,11 +30,5 @@
     _link        = link;
     _imageURL    = imageURL;
 }
-
-@synthesize title       = _title;
-@synthesize description = _description;
-@synthesize date        = _date;
-@synthesize imageURL    = _imageURL;
-@synthesize link        = _link;
 
 @end

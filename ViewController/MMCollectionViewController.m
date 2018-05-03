@@ -18,7 +18,7 @@
     NSURL          * url;
 }
 
-@property (nonatomic, strong) dispatch_queue_t someSerialQueue;
+@property (nonatomic, strong) dispatch_queue_t imageLoadingSerialQueue;
 @property (nonatomic, strong) NSMutableDictionary *imagesByURL;
 @property (nonatomic, strong) MMFullElementRSS *fullElement;
 
@@ -28,21 +28,31 @@
 @implementation MMCollectionViewController
 
 static NSString * const reuseIdentifier = @"Cell";
+static NSString * const showMore        = @"showMore";
+static NSString * const urlPlaceholder  = @"URL";
+static NSString * const add             = @"Add tape";
+static NSString * const go              = @"Go";
+static NSString * const cancel          = @"Cancel";
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return CGSizeMake(collectionView.frame.size.width, 100);
+}
 
 - (IBAction)addButtonWasTaped:(UIBarButtonItem *)sender {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Add tape" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:add message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* actionGo = [UIAlertAction actionWithTitle:@"Go"
+    UIAlertAction* actionGo = [UIAlertAction actionWithTitle:go
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                            self->url = [NSURL URLWithString:alertVC.textFields[0].text];
                                                            [self reloadDataWithURL:self->url];
                                                        }];
     
-    UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+    UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel
                                                          handler:nil];
     
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"URL";
+        textField.placeholder = urlPlaceholder;
     }];
     
     [alertVC addAction:actionGo];
@@ -56,7 +66,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showMore"]) {
+    if ([segue.identifier isEqualToString:showMore]) {
         MMViewController *fullItemVC = [segue destinationViewController];
         NSLog(@"send");
         
@@ -76,9 +86,7 @@ static NSString * const reuseIdentifier = @"Cell";
             img = [self.imagesByURL valueForKey:url.absoluteString];
         }
     }
-    
-    self.fullElement.element = element;
-    self.fullElement.elementImage = img;
+    self.fullElement = [MMFullElementRSS createFullElementWithElement:element andImage:img];
 }
 
 - (void)viewDidLoad {
@@ -120,7 +128,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)updateVisibleCellsImages {
     for (MMCollectionViewCell *cell in [self.collectionView visibleCells]) {
-        dispatch_async(self.someSerialQueue, ^{
+        dispatch_async(self.imageLoadingSerialQueue, ^{
             [cell loadImageFromNet];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -206,11 +214,11 @@ static NSString * const reuseIdentifier = @"Cell";
     return [UIImage imageNamed:@"Marty"];
 }
 
-- (dispatch_queue_t)someSerialQueue {
-    if (!_someSerialQueue) {
-        _someSerialQueue = dispatch_queue_create("com.mm.mySerialQueue", DISPATCH_QUEUE_SERIAL);
+- (dispatch_queue_t)imageLoadingSerialQueue {
+    if (!_imageLoadingSerialQueue) {
+        _imageLoadingSerialQueue = dispatch_queue_create("imageLoadingSerialQueue", DISPATCH_QUEUE_SERIAL);
     }
-    return _someSerialQueue;
+    return _imageLoadingSerialQueue;
 }
 
 #pragma mark - lazy -

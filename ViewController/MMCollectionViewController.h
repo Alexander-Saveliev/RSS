@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMCollectionViewCell.h"
 
-@interface MMCollectionViewController : UICollectionViewController <ImageLoading>
+@interface MMCollectionViewController : UICollectionViewController <ImageLoading, UICollectionViewDelegateFlowLayout>
 
 @end
 

@@ -32,11 +32,7 @@
 - (IBAction)redirectButtonWasTaped:(UIButton *)sender {
     if (fullElement.element.link) {
         [[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:nil];
-        //[[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:^(BOOL success) {}];
-    } else {
-        NSLog(@"lol");
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
