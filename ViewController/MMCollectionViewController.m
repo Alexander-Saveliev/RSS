@@ -13,7 +13,7 @@
 #import "MMFullElementRSS.h"
 #import "MMViewController.h"
 
-@interface MMCollectionViewController () {
+@interface MMCollectionViewController () <ImageLoading, UICollectionViewDelegateFlowLayout> {
     NSMutableArray * rssData;
     NSURL          * url;
 }
@@ -40,7 +40,7 @@ static NSString * const cancel          = @"Cancel";
 }
 
 - (IBAction)addButtonWasTaped:(UIBarButtonItem *)sender {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:add message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(add, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* actionGo = [UIAlertAction actionWithTitle:go
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -162,7 +162,7 @@ static NSString * const cancel          = @"Cancel";
 #pragma mark - UICollectionViewDataSource -
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 1; //TODO: Budet 4to-to
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -190,7 +190,7 @@ static NSString * const cancel          = @"Cancel";
     return cell;
 }
 
-- (UIImage *)imageByURL:(NSURL *)url uisngNet:(BOOL)net {
+- (UIImage *)imageByURL:(NSURL *)url usingNet:(BOOL)net {
     if (!url) {
         return [UIImage imageNamed:@"Marty"];
     }
@@ -214,14 +214,14 @@ static NSString * const cancel          = @"Cancel";
     return [UIImage imageNamed:@"Marty"];
 }
 
+#pragma mark - lazy -
+
 - (dispatch_queue_t)imageLoadingSerialQueue {
     if (!_imageLoadingSerialQueue) {
-        _imageLoadingSerialQueue = dispatch_queue_create("imageLoadingSerialQueue", DISPATCH_QUEUE_SERIAL);
+        _imageLoadingSerialQueue = dispatch_queue_create("com.mm.imageLoadingSerialQueue", DISPATCH_QUEUE_SERIAL);
     }
     return _imageLoadingSerialQueue;
 }
-
-#pragma mark - lazy -
 
 - (NSMutableDictionary *)imagesByURL {
     if (!_imagesByURL) {

@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		405DAC2D2090EB2700765199 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMViewController.m */; };
 		4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4066CE5F209234580043B195 /* MMFullElementRSS.m */; };
+		408540F720A0CCBD0076146A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 408540F920A0CCBD0076146A /* Localizable.strings */; };
 		40C1103A208BA19700C34BC4 /* MMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMCollectionViewController.m */; };
 		40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */; };
 		40C11040208BA4C600C34BC4 /* MMElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103F208BA4C600C34BC4 /* MMElementRSS.m */; };
 		40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11042208BA52700C34BC4 /* MMParserRSS.m */; };
+		40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */; };
 		40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E15CE4208BA120001ED7DA /* AppDelegate.m */; };
 		40E15CEB208BA120001ED7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CE9208BA120001ED7DA /* Main.storyboard */; };
 		40E15CED208BA121001ED7DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CEC208BA121001ED7DA /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 		405DAC2C2090EB2700765199 /* MMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
 		4066CE5E209234580043B195 /* MMFullElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMFullElementRSS.h; path = ModelController/MMFullElementRSS.h; sourceTree = SOURCE_ROOT; };
 		4066CE5F209234580043B195 /* MMFullElementRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MMFullElementRSS.m; path = ModelController/MMFullElementRSS.m; sourceTree = SOURCE_ROOT; };
+		40773CE8209C89FF00EEB069 /* RSS 1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RSS 1.0.xcdatamodel"; sourceTree = "<group>"; };
+		408540FA20A0CF060076146A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		40C11038208BA19700C34BC4 /* MMCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewController.h; sourceTree = "<group>"; };
 		40C11039208BA19700C34BC4 /* MMCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewController.m; sourceTree = "<group>"; };
 		40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
@@ -33,6 +37,7 @@
 		40C1103F208BA4C600C34BC4 /* MMElementRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMElementRSS.m; sourceTree = "<group>"; };
 		40C11041208BA52700C34BC4 /* MMParserRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMParserRSS.h; sourceTree = "<group>"; };
 		40C11042208BA52700C34BC4 /* MMParserRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMParserRSS.m; sourceTree = "<group>"; };
+		40C332C5209ACC0A00DF511C /* RSS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSS.xcdatamodel; sourceTree = "<group>"; };
 		40E15CE0208BA120001ED7DA /* RSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E15CE3208BA120001ED7DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		40E15CE4208BA120001ED7DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 		40E15CEF208BA121001ED7DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E15CF1208BA121001ED7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E15CF2208BA121001ED7DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		40FAF0AD20A0D0C2000960F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,9 @@
 		40E15CE2208BA120001ED7DA /* RSS */ = {
 			isa = PBXGroup;
 			children = (
+				40E15CE3208BA120001ED7DA /* AppDelegate.h */,
+				40E15CE4208BA120001ED7DA /* AppDelegate.m */,
+				40E15CF2208BA121001ED7DA /* main.m */,
 				40E15CF1208BA121001ED7DA /* Info.plist */,
 			);
 			path = RSS;
@@ -109,6 +118,7 @@
 				40E15CE9208BA120001ED7DA /* Main.storyboard */,
 				40E15CEC208BA121001ED7DA /* Assets.xcassets */,
 				40E15CEE208BA121001ED7DA /* LaunchScreen.storyboard */,
+				408540F920A0CCBD0076146A /* Localizable.strings */,
 				40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */,
 				40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */,
 			);
@@ -118,9 +128,7 @@
 		40E15CFB208BA13A001ED7DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				40E15CE3208BA120001ED7DA /* AppDelegate.h */,
-				40E15CE4208BA120001ED7DA /* AppDelegate.m */,
-				40E15CF2208BA121001ED7DA /* main.m */,
+				40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */,
 				40C1103E208BA4C600C34BC4 /* MMElementRSS.h */,
 				40C1103F208BA4C600C34BC4 /* MMElementRSS.m */,
 				40C11041208BA52700C34BC4 /* MMParserRSS.h */,
@@ -171,6 +179,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 40E15CD7208BA120001ED7DA;
 			productRefGroup = 40E15CE1208BA120001ED7DA /* Products */;
@@ -188,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E15CF0208BA121001ED7DA /* LaunchScreen.storyboard in Resources */,
+				408540F720A0CCBD0076146A /* Localizable.strings in Resources */,
 				40E15CED208BA121001ED7DA /* Assets.xcassets in Resources */,
 				40E15CEB208BA120001ED7DA /* Main.storyboard in Resources */,
 			);
@@ -207,6 +217,7 @@
 				4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */,
 				40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */,
 				405DAC2D2090EB2700765199 /* MMViewController.m in Sources */,
+				40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */,
 				40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,10 +225,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		408540F920A0CCBD0076146A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40FAF0AD20A0D0C2000960F8 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		40E15CE9208BA120001ED7DA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				40E15CEA208BA120001ED7DA /* Base */,
+				408540FA20A0CF060076146A /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -237,6 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -295,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -399,6 +421,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40773CE8209C89FF00EEB069 /* RSS 1.0.xcdatamodel */,
+				40C332C5209ACC0A00DF511C /* RSS.xcdatamodel */,
+			);
+			currentVersion = 40C332C5209ACC0A00DF511C /* RSS.xcdatamodel */;
+			path = RSS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 40E15CD8208BA120001ED7DA /* Project object */;
 }

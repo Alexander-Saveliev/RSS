@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies tincidunt aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas feugiat purus eget arcu iaculis vulputate. Fusce maximus ullamcorper elit, ut interdum lorem consequat in. Donec nec neque elementum, eleifend justo sed, tincidunt erat. Etiam vulputate arcu eget ligula eleifend aliquam. Praesent eget auctor arcu. In malesuada magna orci, sed porttitor lorem pretium nec. Aenean nec varius sapien."; ObjectID = "EOp-6v-Ki4"; */
+"EOp-6v-Ki4.text" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies tincidunt aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas feugiat purus eget arcu iaculis vulputate. Fusce maximus ullamcorper elit, ut interdum lorem consequat in. Donec nec neque elementum, eleifend justo sed, tincidunt erat. Etiam vulputate arcu eget ligula eleifend aliquam. Praesent eget auctor arcu. In malesuada magna orci, sed porttitor lorem pretium nec. Aenean nec varius sapien.";
+
+/* Class = "UINavigationItem"; title = "RSS"; ObjectID = "GOU-MC-68e"; */
+"GOU-MC-68e.title" = "RSS";
+
+/* Class = "UILabel"; text = "Книга «С++17 STL. Стандартная библиотека шаблонов"; ObjectID = "KMo-Vd-MGS"; */
+"KMo-Vd-MGS.text" = "Книга «С++17 STL. Стандартная библиотека шаблонов";
+
+/* Class = "UIButton"; normalTitle = "Open in browser"; ObjectID = "oG9-cA-EBD"; */
+"oG9-cA-EBD.normalTitle" = "Открыть в браузере";
+
+/* Class = "UILabel"; text = "Thu, 26 Apr 2018 15:12:26 GMT"; ObjectID = "pCz-ej-qJD"; */
+"pCz-ej-qJD.text" = "Thu, 26 Apr 2018 15:12:26 GMT";

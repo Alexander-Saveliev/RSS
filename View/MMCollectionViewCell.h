@@ -29,6 +29,6 @@
 
 @protocol ImageLoading <NSObject>
 
-- (UIImage *)imageByURL:(NSURL *)url uisngNet:(BOOL)net;
+- (UIImage *)imageByURL:(NSURL *)url usingNet:(BOOL)net;
 
 @end

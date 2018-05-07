@@ -14,7 +14,7 @@
 
 - (void)loadImageFromNet {
     NSURL *urlToLoad = [self.url copy];
-    UIImage *imgToLoad = [_delegate imageByURL:self.url uisngNet:YES];
+    UIImage *imgToLoad = [_delegate imageByURL:self.url usingNet:YES];
     
     if (urlToLoad == self.url) {
         self.img = imgToLoad;
@@ -23,7 +23,7 @@
 
 - (void)loadImageFromMemory {
     NSURL *urlToLoad = [self.url copy];
-    UIImage *imgToLoad = [_delegate imageByURL:self.url uisngNet:NO];
+    UIImage *imgToLoad = [_delegate imageByURL:self.url usingNet:NO];
     
     if (urlToLoad == self.url) {
         self.img = imgToLoad;
