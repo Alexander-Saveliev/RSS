@@ -151,9 +151,13 @@ static NSString * const cancel          = @"Cancel";
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
+    __weak typeof(self) weakSelf = self;
+    
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [parser setData:data];
-        self->rssData = [parser parsedItems];
+        __strong typeof(self) strongSelf = weakSelf;
+        
+        strongSelf->rssData = [parser parsedItems];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
