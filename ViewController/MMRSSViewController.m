@@ -6,14 +6,14 @@
 //  Copyright © 2018 Marty. All rights reserved.
 //
 
-#import "MMCollectionViewController.h"
+#import "MMRSSViewController.h"
 #import "MMCollectionViewCell.h"
 #import "MMParserRSS.h"
 #import "MMElementRSS.h"
 #import "MMFullElementRSS.h"
-#import "MMViewController.h"
+#import "MMDetailViewController.h"
 
-@interface MMCollectionViewController () <ImageLoading, UICollectionViewDelegateFlowLayout> {
+@interface MMRSSViewController () <ImageLoading, UICollectionViewDelegateFlowLayout> {
     NSMutableArray * rssData;
     NSURL          * url;
 }
@@ -25,7 +25,7 @@
 @end
 
 
-@implementation MMCollectionViewController
+@implementation MMRSSViewController
 
 static NSString * const reuseIdentifier = @"Cell";
 static NSString * const showMore        = @"showMore";
@@ -67,7 +67,7 @@ static NSString * const cancel          = @"Cancel";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:showMore]) {
-        MMViewController *fullItemVC = [segue destinationViewController];
+        MMDetailViewController *fullItemVC = [segue destinationViewController];
         NSLog(@"send");
         
         fullItemVC.fullElement = self.fullElement;
@@ -86,7 +86,9 @@ static NSString * const cancel          = @"Cancel";
             img = [self.imagesByURL valueForKey:url.absoluteString];
         }
     }
-    self.fullElement = [MMFullElementRSS createFullElementWithElement:element andImage:img];
+    self.fullElement.element      = element;
+    self.fullElement.elementImage = img;
+    NSLog(@"set element");
 }
 
 - (void)viewDidLoad {

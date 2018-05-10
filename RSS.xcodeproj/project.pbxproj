@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		405DAC2D2090EB2700765199 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMViewController.m */; };
+		405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMDetailViewController.m */; };
 		4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4066CE5F209234580043B195 /* MMFullElementRSS.m */; };
 		408540F720A0CCBD0076146A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 408540F920A0CCBD0076146A /* Localizable.strings */; };
-		40C1103A208BA19700C34BC4 /* MMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMCollectionViewController.m */; };
+		40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMRSSViewController.m */; };
 		40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */; };
 		40C11040208BA4C600C34BC4 /* MMElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103F208BA4C600C34BC4 /* MMElementRSS.m */; };
 		40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11042208BA52700C34BC4 /* MMParserRSS.m */; };
@@ -23,14 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		405DAC2B2090EB2700765199 /* MMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMViewController.h; sourceTree = "<group>"; };
-		405DAC2C2090EB2700765199 /* MMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
+		405DAC2B2090EB2700765199 /* MMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMDetailViewController.h; sourceTree = "<group>"; };
+		405DAC2C2090EB2700765199 /* MMDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMDetailViewController.m; sourceTree = "<group>"; };
 		4066CE5E209234580043B195 /* MMFullElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMFullElementRSS.h; path = ModelController/MMFullElementRSS.h; sourceTree = SOURCE_ROOT; };
 		4066CE5F209234580043B195 /* MMFullElementRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MMFullElementRSS.m; path = ModelController/MMFullElementRSS.m; sourceTree = SOURCE_ROOT; };
 		40773CE8209C89FF00EEB069 /* RSS 1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RSS 1.0.xcdatamodel"; sourceTree = "<group>"; };
 		408540FA20A0CF060076146A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		40C11038208BA19700C34BC4 /* MMCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewController.h; sourceTree = "<group>"; };
-		40C11039208BA19700C34BC4 /* MMCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewController.m; sourceTree = "<group>"; };
+		40C11038208BA19700C34BC4 /* MMRSSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSViewController.h; sourceTree = "<group>"; };
+		40C11039208BA19700C34BC4 /* MMRSSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSViewController.m; sourceTree = "<group>"; };
 		40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
 		40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewCell.m; sourceTree = "<group>"; };
 		40C1103E208BA4C600C34BC4 /* MMElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMElementRSS.h; sourceTree = "<group>"; };
@@ -104,10 +104,10 @@
 		40E15CF9208BA12A001ED7DA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				40C11038208BA19700C34BC4 /* MMCollectionViewController.h */,
-				40C11039208BA19700C34BC4 /* MMCollectionViewController.m */,
-				405DAC2B2090EB2700765199 /* MMViewController.h */,
-				405DAC2C2090EB2700765199 /* MMViewController.m */,
+				40C11038208BA19700C34BC4 /* MMRSSViewController.h */,
+				40C11039208BA19700C34BC4 /* MMRSSViewController.m */,
+				405DAC2B2090EB2700765199 /* MMDetailViewController.h */,
+				405DAC2C2090EB2700765199 /* MMDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -211,12 +211,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E15CF3208BA121001ED7DA /* main.m in Sources */,
-				40C1103A208BA19700C34BC4 /* MMCollectionViewController.m in Sources */,
+				40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */,
 				40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */,
 				40C11040208BA4C600C34BC4 /* MMElementRSS.m in Sources */,
 				4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */,
 				40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */,
-				405DAC2D2090EB2700765199 /* MMViewController.m in Sources */,
+				405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */,
 				40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */,
 				40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */,
 			);

@@ -1,19 +1,19 @@
 //
-//  MMViewController.m
+//  MMDetailViewController.m
 //  RSS
 //
 //  Created by Marty on 25/04/2018.
 //  Copyright © 2018 Marty. All rights reserved.
 //
 
-#import "MMViewController.h"
+#import "MMDetailViewController.h"
 
 
-@interface MMViewController ()
+@interface MMDetailViewController ()
 
 @end
 
-@implementation MMViewController
+@implementation MMDetailViewController
 
 @synthesize fullElement;
 

@@ -1,5 +1,5 @@
 //
-//  MMCollectionViewController.h
+//  MMRSSViewController.h
 //  RSS
 //
 //  Created by Marty on 21/04/2018.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MMCollectionViewCell.h"
+#import "MMRSSViewController.h"
 
-@interface MMCollectionViewController : UICollectionViewController 
+@interface MMRSSViewController : UICollectionViewController 
 
 @end
 

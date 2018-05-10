@@ -1,5 +1,5 @@
 //
-//  MMViewController.h
+//  MMDetailViewController.h
 //  RSS
 //
 //  Created by Marty on 25/04/2018.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMFullElementRSS.h"
 
-@interface MMViewController : UIViewController {
+@interface MMDetailViewController : UIViewController {
     
     __weak IBOutlet UILabel *titleLabel;
     __weak IBOutlet UILabel *descriptionLabel;

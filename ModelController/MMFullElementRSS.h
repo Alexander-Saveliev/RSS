@@ -14,7 +14,7 @@
 
 + (instancetype)createFullElementWithElement:(MMElementRSS *)element andImage:(UIImage *)image;
 
-@property (readonly) MMElementRSS* element;
-@property (readonly) UIImage* elementImage;
+@property MMElementRSS* element;
+@property UIImage* elementImage;
 
 @end

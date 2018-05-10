@@ -31,7 +31,7 @@
         <!--RSS-->
         <scene sceneID="5y1-fJ-Ugj">
             <objects>
-                <collectionViewController id="2In-LX-H1x" customClass="MMCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController id="2In-LX-H1x" customClass="MMRSSViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="x6I-VJ-bQj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="-273.75" y="219.71830985915494"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="ssc-OM-AG0">
             <objects>
-                <viewController id="KaI-t4-wUA" customClass="MMViewController" sceneMemberID="viewController">
+                <viewController id="KaI-t4-wUA" customClass="MMDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Ci-TA-RUf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
