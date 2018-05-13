@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		401F7B4A20A87A5400E7D7CD /* MMRSSResourceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */; };
 		405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMDetailViewController.m */; };
 		4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4066CE5F209234580043B195 /* MMFullElementRSS.m */; };
 		408540F720A0CCBD0076146A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 408540F920A0CCBD0076146A /* Localizable.strings */; };
+		40AF047620A810DB00F2D346 /* MMCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF047520A810DB00F2D346 /* MMCoreDataStackManager.m */; };
+		40AF049120A819A100F2D346 /* MMRSSItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF049020A819A100F2D346 /* MMRSSItemEntity.m */; };
+		40AF049A20A81A7200F2D346 /* MMRSSResourceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF049920A81A7200F2D346 /* MMRSSResourceEntity.m */; };
+		40AF049D20A8293B00F2D346 /* MMRSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF049C20A8293B00F2D346 /* MMRSSItem.m */; };
+		40AF04A020A82BE000F2D346 /* MMRSSResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF049F20A82BE000F2D346 /* MMRSSResource.m */; };
+		40AF04A520A832F700F2D346 /* MMNetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF04A420A832F700F2D346 /* MMNetworkTask.m */; };
+		40AF04A820A8618000F2D346 /* MMRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF04A720A8618000F2D346 /* MMRSSParser.m */; };
 		40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMRSSViewController.m */; };
 		40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */; };
 		40C11040208BA4C600C34BC4 /* MMElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103F208BA4C600C34BC4 /* MMElementRSS.m */; };
-		40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11042208BA52700C34BC4 /* MMParserRSS.m */; };
 		40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */; };
 		40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E15CE4208BA120001ED7DA /* AppDelegate.m */; };
 		40E15CEB208BA120001ED7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CE9208BA120001ED7DA /* Main.storyboard */; };
@@ -23,20 +30,36 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		401F7B4820A87A5400E7D7CD /* MMRSSResourceUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResourceUpdater.h; sourceTree = "<group>"; };
+		401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResourceUpdater.m; sourceTree = "<group>"; };
 		405DAC2B2090EB2700765199 /* MMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMDetailViewController.h; sourceTree = "<group>"; };
 		405DAC2C2090EB2700765199 /* MMDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMDetailViewController.m; sourceTree = "<group>"; };
 		4066CE5E209234580043B195 /* MMFullElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMFullElementRSS.h; path = ModelController/MMFullElementRSS.h; sourceTree = SOURCE_ROOT; };
 		4066CE5F209234580043B195 /* MMFullElementRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MMFullElementRSS.m; path = ModelController/MMFullElementRSS.m; sourceTree = SOURCE_ROOT; };
 		40773CE8209C89FF00EEB069 /* RSS 1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RSS 1.0.xcdatamodel"; sourceTree = "<group>"; };
 		408540FA20A0CF060076146A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		40AF047420A810DB00F2D346 /* MMCoreDataStackManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMCoreDataStackManager.h; path = RSS/MMCoreDataStackManager.h; sourceTree = SOURCE_ROOT; };
+		40AF047520A810DB00F2D346 /* MMCoreDataStackManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MMCoreDataStackManager.m; path = RSS/MMCoreDataStackManager.m; sourceTree = SOURCE_ROOT; };
+		40AF048F20A819A100F2D346 /* MMRSSItemEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSItemEntity.h; sourceTree = "<group>"; };
+		40AF049020A819A100F2D346 /* MMRSSItemEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSItemEntity.m; sourceTree = "<group>"; };
+		40AF049820A81A7200F2D346 /* MMRSSResourceEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResourceEntity.h; sourceTree = "<group>"; };
+		40AF049920A81A7200F2D346 /* MMRSSResourceEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResourceEntity.m; sourceTree = "<group>"; };
+		40AF049B20A8293B00F2D346 /* MMRSSItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSItem.h; sourceTree = "<group>"; };
+		40AF049C20A8293B00F2D346 /* MMRSSItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSItem.m; sourceTree = "<group>"; };
+		40AF049E20A82BE000F2D346 /* MMRSSResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResource.h; sourceTree = "<group>"; };
+		40AF049F20A82BE000F2D346 /* MMRSSResource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResource.m; sourceTree = "<group>"; };
+		40AF04A320A832F700F2D346 /* MMNetworkTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMNetworkTask.h; sourceTree = "<group>"; };
+		40AF04A420A832F700F2D346 /* MMNetworkTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMNetworkTask.m; sourceTree = "<group>"; };
+		40AF04A620A8618000F2D346 /* MMRSSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSParser.h; sourceTree = "<group>"; };
+		40AF04A720A8618000F2D346 /* MMRSSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSParser.m; sourceTree = "<group>"; };
+		40AF04A920A8659000F2D346 /* MMRSSXMLResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSXMLResource.h; sourceTree = "<group>"; };
+		40AF04AB20A8679300F2D346 /* MMRSSXMLItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSXMLItem.h; sourceTree = "<group>"; };
 		40C11038208BA19700C34BC4 /* MMRSSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSViewController.h; sourceTree = "<group>"; };
 		40C11039208BA19700C34BC4 /* MMRSSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSViewController.m; sourceTree = "<group>"; };
 		40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
 		40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewCell.m; sourceTree = "<group>"; };
 		40C1103E208BA4C600C34BC4 /* MMElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMElementRSS.h; sourceTree = "<group>"; };
 		40C1103F208BA4C600C34BC4 /* MMElementRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMElementRSS.m; sourceTree = "<group>"; };
-		40C11041208BA52700C34BC4 /* MMParserRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMParserRSS.h; sourceTree = "<group>"; };
-		40C11042208BA52700C34BC4 /* MMParserRSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMParserRSS.m; sourceTree = "<group>"; };
 		40C332C5209ACC0A00DF511C /* RSS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSS.xcdatamodel; sourceTree = "<group>"; };
 		40E15CE0208BA120001ED7DA /* RSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E15CE3208BA120001ED7DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +93,39 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		40AF04A120A8327D00F2D346 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				40AF04A320A832F700F2D346 /* MMNetworkTask.h */,
+				40AF04A420A832F700F2D346 /* MMNetworkTask.m */,
+				40AF04A620A8618000F2D346 /* MMRSSParser.h */,
+				40AF04A720A8618000F2D346 /* MMRSSParser.m */,
+				401F7B4820A87A5400E7D7CD /* MMRSSResourceUpdater.h */,
+				401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		40AF04A220A8328D00F2D346 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				40AF049820A81A7200F2D346 /* MMRSSResourceEntity.h */,
+				40AF049920A81A7200F2D346 /* MMRSSResourceEntity.m */,
+				40AF048F20A819A100F2D346 /* MMRSSItemEntity.h */,
+				40AF049020A819A100F2D346 /* MMRSSItemEntity.m */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		40AF04AA20A8659600F2D346 /* ResponseParser */ = {
+			isa = PBXGroup;
+			children = (
+				40AF04A920A8659000F2D346 /* MMRSSXMLResource.h */,
+				40AF04AB20A8679300F2D346 /* MMRSSXMLItem.h */,
+			);
+			path = ResponseParser;
+			sourceTree = "<group>";
+		};
 		40E15CD7208BA120001ED7DA = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +149,8 @@
 		40E15CE2208BA120001ED7DA /* RSS */ = {
 			isa = PBXGroup;
 			children = (
+				40AF047420A810DB00F2D346 /* MMCoreDataStackManager.h */,
+				40AF047520A810DB00F2D346 /* MMCoreDataStackManager.m */,
 				40E15CE3208BA120001ED7DA /* AppDelegate.h */,
 				40E15CE4208BA120001ED7DA /* AppDelegate.m */,
 				40E15CF2208BA121001ED7DA /* main.m */,
@@ -128,11 +186,16 @@
 		40E15CFB208BA13A001ED7DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				40AF04AA20A8659600F2D346 /* ResponseParser */,
+				40AF04A220A8328D00F2D346 /* Entity */,
+				40AF04A120A8327D00F2D346 /* Utils */,
 				40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */,
 				40C1103E208BA4C600C34BC4 /* MMElementRSS.h */,
 				40C1103F208BA4C600C34BC4 /* MMElementRSS.m */,
-				40C11041208BA52700C34BC4 /* MMParserRSS.h */,
-				40C11042208BA52700C34BC4 /* MMParserRSS.m */,
+				40AF049B20A8293B00F2D346 /* MMRSSItem.h */,
+				40AF049C20A8293B00F2D346 /* MMRSSItem.m */,
+				40AF049E20A82BE000F2D346 /* MMRSSResource.h */,
+				40AF049F20A82BE000F2D346 /* MMRSSResource.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,14 +274,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E15CF3208BA121001ED7DA /* main.m in Sources */,
+				401F7B4A20A87A5400E7D7CD /* MMRSSResourceUpdater.m in Sources */,
 				40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */,
+				40AF049A20A81A7200F2D346 /* MMRSSResourceEntity.m in Sources */,
 				40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */,
+				40AF04A520A832F700F2D346 /* MMNetworkTask.m in Sources */,
+				40AF047620A810DB00F2D346 /* MMCoreDataStackManager.m in Sources */,
 				40C11040208BA4C600C34BC4 /* MMElementRSS.m in Sources */,
+				40AF04A820A8618000F2D346 /* MMRSSParser.m in Sources */,
+				40AF04A020A82BE000F2D346 /* MMRSSResource.m in Sources */,
 				4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */,
 				40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */,
 				405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */,
 				40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */,
-				40C11043208BA52700C34BC4 /* MMParserRSS.m in Sources */,
+				40AF049120A819A100F2D346 /* MMRSSItemEntity.m in Sources */,
+				40AF049D20A8293B00F2D346 /* MMRSSItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,13 @@
 
 #import "MMRSSViewController.h"
 #import "MMCollectionViewCell.h"
-#import "MMParserRSS.h"
 #import "MMElementRSS.h"
 #import "MMFullElementRSS.h"
 #import "MMDetailViewController.h"
+#import "MMNetworkTask.h"
+#import "MMRSSParser.h"
+#import "MMRSSResourceUpdater.h"
+
 
 @interface MMRSSViewController () <ImageLoading, UICollectionViewDelegateFlowLayout> {
     NSMutableArray * rssData;
@@ -27,6 +30,24 @@
 
 @implementation MMRSSViewController
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    MMNetworkTask *task = [MMNetworkTask new];
+    [task initWithURL:[NSURL URLWithString:@"https://habrahabr.ru/rss/interesting/"] successBlock:^(NSData *data) {
+        MMRSSParser *parser = [MMRSSParser new];
+        [parser parse:data success:^(id<MMRSSXMLResource> resource) {
+            MMRSSResourceUpdater *updater = [MMRSSResourceUpdater new];
+            [updater update:resource];
+        } failure:^{
+            NSLog(@"Noooooo, I will make apps for android");
+        }];
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
+/*
 static NSString * const reuseIdentifier = @"Cell";
 static NSString * const showMore        = @"showMore";
 static NSString * const urlPlaceholder  = @"URL";
@@ -142,11 +163,6 @@ static NSString * const cancel          = @"Cancel";
 
 - (void)reloadDataWithURL:(NSURL *)url {
     
-#ifdef DEBUG
-    self.imagesByURL = [NSMutableDictionary new];
-    [self updateVisibleCellsImages];
-#endif
-    
     MMParserRSS *parser = [MMParserRSS new];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -156,10 +172,13 @@ static NSString * const cancel          = @"Cancel";
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [parser setData:data];
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) {
+            return;
+        }
         
         strongSelf->rssData = [parser parsedItems];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
+            [strongSelf.collectionView reloadData];
         });
     }];
     [task resume];
@@ -235,5 +254,5 @@ static NSString * const cancel          = @"Cancel";
     }
     return _imagesByURL;
 }
-
+*/
 @end
