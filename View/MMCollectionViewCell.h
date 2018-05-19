@@ -8,27 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@class MMRSSItem;
+
 @protocol ImageLoading;
 
 @interface MMCollectionViewCell : UICollectionViewCell
 
-- (void)loadImageFromNet;
-- (void)loadImageFromMemory;
-- (void)setCurrentImage;
+- (void)configureWithItem:(MMRSSItem *)item;
+- (void)setupImageIfNeeded;
 
 @property (weak, nonatomic) id <ImageLoading> delegate;
+@property (weak, nonatomic) MMRSSItem *item;
 
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
 @property (weak, nonatomic) IBOutlet UILabel     *title;
 @property (weak, nonatomic) IBOutlet UILabel     *date;
 
-@property UIImage *img;
-@property NSURL   *url;
-
 @end
 
 @protocol ImageLoading <NSObject>
 
-- (UIImage *)imageByURL:(NSURL *)url usingNet:(BOOL)net;
+- (void)loadImageData:(MMRSSItem *)item successBlock:(void(^)(NSData *data))successBlock;
 
 @end

@@ -12,7 +12,7 @@
 
 @interface MMRSSResource : NSObject
 
-+ (id)makeFromResource:(MMRSSResourceEntity *)reesource;
++ (id)makeFromEntity:(MMRSSResourceEntity *)reesource;
 
 @property (readonly) NSString *title;
 @property (readonly) NSURL *url;

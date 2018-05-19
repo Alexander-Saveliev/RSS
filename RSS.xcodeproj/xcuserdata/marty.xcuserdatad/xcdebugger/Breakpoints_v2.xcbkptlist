@@ -6,17 +6,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Model/Utils/MMRSSResourceUpdater.m"
-            timestampString = "547919556.794114"
+            filePath = "ViewController/MMRSSViewController.m"
+            timestampString = "548439672.078933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-update:"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
+            landmarkName = "-loadImageData:successBlock:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MMRSSViewController loadImageData:successBlock:]"
+                  moduleName = "RSS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marty/Documents/dev/Xcode/RSS/ViewController/MMRSSViewController.m"
+                  timestampString = "548437310.177881"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[MMRSSViewController loadImageData:successBlock:]_block_invoke"
+                  moduleName = "RSS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marty/Documents/dev/Xcode/RSS/ViewController/MMRSSViewController.m"
+                  timestampString = "548437310.182628"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.127"
+                  moduleName = "RSS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marty/Documents/dev/Xcode/RSS/ViewController/MMRSSViewController.m"
+                  timestampString = "548437310.192417"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

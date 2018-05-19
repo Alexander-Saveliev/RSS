@@ -7,32 +7,27 @@
 //
 
 #import "MMCollectionViewCell.h"
+#import "MMRSSItem.h"
 
 @implementation MMCollectionViewCell
 
-@synthesize url;
-
-- (void)loadImageFromNet {
-    NSURL *urlToLoad = [self.url copy];
-    UIImage *imgToLoad = [_delegate imageByURL:self.url usingNet:YES];
+- (void)configureWithItem:(MMRSSItem *)item {
+    self.item = item;
     
-    if (urlToLoad == self.url) {
-        self.img = imgToLoad;
-    }
+    self.title.text = item.title;
+    self.date.text  = [NSDateFormatter localizedStringFromDate:item.pubDate
+                                                     dateStyle:NSDateFormatterShortStyle
+                                                     timeStyle:NSDateFormatterFullStyle];
+    self.picture.image = (_item.img) ? [UIImage imageWithData:_item.img] : [UIImage imageNamed:@"Marty"];
 }
 
-- (void)loadImageFromMemory {
-    NSURL *urlToLoad = [self.url copy];
-    UIImage *imgToLoad = [_delegate imageByURL:self.url usingNet:NO];
-    
-    if (urlToLoad == self.url) {
-        self.img = imgToLoad;
-    }
-}
-
-- (void)setCurrentImage {
-    if (self.img) {
-        self.picture.image = self.img;
+- (void)setupImageIfNeeded {
+    if (_item.img) {
+        self.picture.image = [UIImage imageWithData:_item.img];
+    } else {
+        [_delegate loadImageData:_item successBlock:^(NSData *data) {
+            self.picture.image = (data) ? [UIImage imageWithData:data] : [UIImage imageNamed:@"Marty"];
+        }];
     }
 }
 

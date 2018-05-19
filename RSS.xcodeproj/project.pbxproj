@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		401F7B4A20A87A5400E7D7CD /* MMRSSResourceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */; };
+		40436D2220B066F600F9A00E /* NSDate+RFC.m in Sources */ = {isa = PBXBuildFile; fileRef = 40436D2020B066F500F9A00E /* NSDate+RFC.m */; };
 		405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMDetailViewController.m */; };
 		4066CE60209234580043B195 /* MMFullElementRSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 4066CE5F209234580043B195 /* MMFullElementRSS.m */; };
 		408540F720A0CCBD0076146A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 408540F920A0CCBD0076146A /* Localizable.strings */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		401F7B4820A87A5400E7D7CD /* MMRSSResourceUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResourceUpdater.h; sourceTree = "<group>"; };
 		401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResourceUpdater.m; sourceTree = "<group>"; };
+		40436D2020B066F500F9A00E /* NSDate+RFC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC.m"; sourceTree = "<group>"; };
+		40436D2120B066F500F9A00E /* NSDate+RFC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC.h"; sourceTree = "<group>"; };
 		405DAC2B2090EB2700765199 /* MMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMDetailViewController.h; sourceTree = "<group>"; };
 		405DAC2C2090EB2700765199 /* MMDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMDetailViewController.m; sourceTree = "<group>"; };
 		4066CE5E209234580043B195 /* MMFullElementRSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MMFullElementRSS.h; path = ModelController/MMFullElementRSS.h; sourceTree = SOURCE_ROOT; };
@@ -96,6 +99,8 @@
 		40AF04A120A8327D00F2D346 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				40436D2120B066F500F9A00E /* NSDate+RFC.h */,
+				40436D2020B066F500F9A00E /* NSDate+RFC.m */,
 				40AF04A320A832F700F2D346 /* MMNetworkTask.h */,
 				40AF04A420A832F700F2D346 /* MMNetworkTask.m */,
 				40AF04A620A8618000F2D346 /* MMRSSParser.h */,
@@ -287,6 +292,7 @@
 				40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */,
 				405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */,
 				40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */,
+				40436D2220B066F600F9A00E /* NSDate+RFC.m in Sources */,
 				40AF049120A819A100F2D346 /* MMRSSItemEntity.m in Sources */,
 				40AF049D20A8293B00F2D346 /* MMRSSItem.m in Sources */,
 			);

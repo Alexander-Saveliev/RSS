@@ -10,6 +10,7 @@
 #import "MMRSSResource.h"
 #import "MMRSSXMLResource.h"
 #import "MMRSSXMLItem.h"
+#import "NSDate+RFC.h"
 
 @interface MMRSSXMLItemImpl: NSObject<MMRSSXMLItem>
 @property NSString *title;
@@ -54,6 +55,7 @@ static NSString * const linkRSS     = @"link";
 static NSString * const description = @"description";
 static NSString * const url         = @"url";
 static NSString * const media       = @"media:content";
+
 
 - (void)parse:(NSData *)data success:(ParserSuccessBlock)success failure:(ParserFailureBlock)failure {
     
@@ -125,10 +127,7 @@ static NSString * const media       = @"media:content";
             _item.title = _strXMLString;
         }
     } else if ([elementName isEqualToString:pubDate]) {
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-        dateFormatter.dateStyle = NSDateIntervalFormatterFullStyle;
-        _item.pubDate = [dateFormatter dateFromString:_strXMLString];
+        _item.pubDate = [NSDate dateWithRFCString:_strXMLString format:ISDateFormatNone];
     } else if ([elementName isEqualToString:linkRSS]) {
         if (!_resource.link) {
             _resource.link = [NSURL URLWithString:_strXMLString];
@@ -143,6 +142,9 @@ static NSString * const media       = @"media:content";
         }
     } else if ([elementName isEqualToString:item]) {
         if (_item.title && _item.link && _item.summary) {
+            if (!_resource.items) {
+                _resource.items = [NSMutableArray new];
+            }
             [_resource.items addObject:_item];
         }
     } else if ([elementName isEqualToString:rss]) {

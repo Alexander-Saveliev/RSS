@@ -12,15 +12,15 @@
 
 @implementation MMRSSResource
 
-+ (id)makeFromResource:(MMRSSResourceEntity *)entity {
++ (id)makeFromEntity:(MMRSSResourceEntity *)entity {
     MMRSSResource *resource = [MMRSSResource new];
-    [resource loadFromResource:entity];
+    [resource loadFromEntity:entity];
     
     return resource;
 }
 
 
-- (void)loadFromResource:(MMRSSResourceEntity *)resource {
+- (void)loadFromEntity:(MMRSSResourceEntity *)resource {
     _title = resource.p_title;
     _url   = resource.p_url;
     

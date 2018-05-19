@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMRSSViewController.h"
 
-@interface MMRSSViewController : UICollectionViewController 
+@interface MMRSSViewController : UICollectionViewController
 
 @end
 

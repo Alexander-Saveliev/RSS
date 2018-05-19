@@ -17,7 +17,7 @@
 @property (readonly) NSString *title;
 @property (readonly) NSString *summary;
 @property (readonly) NSURL    *link;
-@property (readonly) NSData   *img;
+@property NSData              *img;
 @property (readonly) NSDate   *pubDate;
 @property (readonly) NSURL    *imgUrl;
 

@@ -10,9 +10,12 @@
 #import "MMRSSXMLResource.h"
 #import "MMRSSXMLItem.h"
 
+@class MMRSSItemEntity;
+
 @interface MMRSSResourceUpdater : NSObject
 
 - (void)update:(id<MMRSSXMLResource>)resource;
+- (void)updateItemEntity:(NSURL *)itemUrl withBlock:(void(^)(MMRSSItemEntity *item))block;
 
 @end
 

@@ -14,7 +14,7 @@ static const NSString *kMMurl = @"p_url";
 
 + (NSFetchRequest<MMRSSResourceEntity *> *)fetchRequestWithResourceURL:(NSURL *)url {
     NSFetchRequest *fetchRequest = [MMRSSResourceEntity fetchRequest];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%@ == %@", kMMurl, url];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K == %@", kMMurl, url];
     
     return fetchRequest;
 }

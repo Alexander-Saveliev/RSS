@@ -54,15 +54,18 @@
         NSLog(@"error with saving context");
     } @finally {
     }
+}
+
+- (void)updateItemEntity:(NSURL *)itemUrl withBlock:(void(^)(MMRSSItemEntity *item))block {
+    NSManagedObjectContext *context = [[MMCoreDataStackManager sharedInstance] context];
     
-    NSFetchRequest<MMRSSResourceEntity *> *request = [MMRSSResourceEntity fetchRequest];
-    NSArray<MMRSSResourceEntity *> *result = [context executeFetchRequest:request error:nil];
+    NSFetchRequest<MMRSSItemEntity *> *itemForURL = [MMRSSItemEntity fetchItemWithURL:itemUrl];
+    MMRSSItemEntity *itemEntity = [[context executeFetchRequest:itemForURL error:nil] firstObject];
     
-    MMRSSResourceEntity *ent = result.firstObject;
-    NSSet *items = ent.items;
-    NSInteger count = [items count];
-    
-    int a =5;
+    if (block && itemEntity) {
+        block(itemEntity);
+        [context save:nil];
+    }
 }
 
 @end
