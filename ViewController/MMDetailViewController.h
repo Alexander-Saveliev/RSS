@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MMFullElementRSS.h"
+@class MMRSSItem;
 
 @interface MMDetailViewController : UIViewController {
     
@@ -18,6 +18,6 @@
     
 }
 
-@property (nonatomic, strong) MMFullElementRSS *fullElement;
+@property (nonatomic, strong) MMRSSItem* item;
 
 @end

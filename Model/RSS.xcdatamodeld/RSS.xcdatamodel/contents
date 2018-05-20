@@ -12,10 +12,10 @@
     <entity name="RSSResourceEntity" representedClassName="MMRSSResourceEntity" syncable="YES" codeGenerationType="category">
         <attribute name="p_title" attributeType="String" syncable="YES"/>
         <attribute name="p_url" attributeType="URI" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSItemEntity" inverseName="parentResource" inverseEntity="RSSItemEntity" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSItemEntity" inverseName="parentResource" inverseEntity="RSSItemEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RSSItemEntity" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="RSSResourceEntity" positionX="216" positionY="-9" width="128" height="88"/>
+        <element name="RSSItemEntity" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="RSSResourceEntity" positionX="216" positionY="-9" width="128" height="90"/>
     </elements>
 </model>

@@ -11,10 +11,10 @@
 @protocol MMRSSXMLResource;
 
 typedef void (^ParserSuccessBlock)(id<MMRSSXMLResource> resource);
-typedef void (^ParserFailureBlock)();
+typedef void (^ParserFailureBlock)(void);
 
 @interface MMRSSParser : NSObject
 
-- (void)parse:(NSData *)data success:(ParserSuccessBlock)success failure:(ParserFailureBlock)failure;
+- (void)parse:(NSData *)data withURL:(NSURL *)url success:(ParserSuccessBlock)success failure:(ParserFailureBlock)failure;
 
 @end

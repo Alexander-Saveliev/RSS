@@ -12,6 +12,7 @@
 @interface MMCoreDataStackManager : NSObject
 
 + (id)sharedInstance;
+- (void)saveContext;
 
 @property (readonly) NSManagedObjectContext *context;
 

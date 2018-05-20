@@ -7,10 +7,7 @@
 //
 
 #import "MMDetailViewController.h"
-#import "MMCoreDataStackManager.h"
-#import <CoreData/CoreData.h>
-#import "MMRSSItemEntity.h"
-#import "MMRSSResourceEntity.h"
+#import "MMRSSItem.h"
 
 
 @interface MMDetailViewController ()
@@ -19,10 +16,19 @@
 
 @implementation MMDetailViewController
 
-@synthesize fullElement;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[_item.summary dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    
+    titleLabel.text = _item.title;
+    descriptionLabel.attributedText = attrStr;
+    pubDateLabel.text  = [NSDateFormatter localizedStringFromDate:_item.pubDate
+                                                                          dateStyle:NSDateFormatterShortStyle
+                                                                          timeStyle:NSDateFormatterFullStyle];
+    
+    image.image = [UIImage imageWithData:_item.img];
+}
     
     
 //    NSManagedObjectContext *context = [[MMCoreDataStackManager sharedInstance] context];
@@ -66,18 +72,18 @@
 //    descriptionLabel.attributedText = attrStr;
 //    pubDateLabel.text     = fullElement.element.date;
 //    image.image           = fullElement.elementImage;
-}
 
-- (IBAction)redirectButtonWasTaped:(UIButton *)sender {
-    if (fullElement.element.link) {
-        [[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:nil];
-    }
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+//- (IBAction)redirectButtonWasTaped:(UIButton *)sender {
+//    if (fullElement.element.link) {
+//        [[UIApplication sharedApplication] openURL:fullElement.element.link options:@{} completionHandler:nil];
+//    }
+//}
+//
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
 
 /*
 #pragma mark - Navigation

@@ -41,6 +41,8 @@
 @property NSString *channelDescription;
 @property ParserSuccessBlock success;
 @property ParserFailureBlock failure;
+@property NSURL *urlResource;
+@property BOOL resourceLinkLoaded;
 
 @end
 
@@ -57,8 +59,8 @@ static NSString * const url         = @"url";
 static NSString * const media       = @"media:content";
 
 
-- (void)parse:(NSData *)data success:(ParserSuccessBlock)success failure:(ParserFailureBlock)failure {
-    
+- (void)parse:(NSData *)data withURL:(NSURL *)url success:(ParserSuccessBlock)success failure:(ParserFailureBlock)failure {
+    _urlResource = url;
     _success = success;
     _failure = failure;
     
@@ -93,6 +95,7 @@ static NSString * const media       = @"media:content";
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     if ([elementName isEqualToString:rss]) {
         _resource = [MMRSSXMLResourceImpl new];
+        _resource.link = _urlResource;
     }
     if ([elementName isEqualToString:item]) {
         _item = [MMRSSXMLItemImpl new];
@@ -129,8 +132,8 @@ static NSString * const media       = @"media:content";
     } else if ([elementName isEqualToString:pubDate]) {
         _item.pubDate = [NSDate dateWithRFCString:_strXMLString format:ISDateFormatNone];
     } else if ([elementName isEqualToString:linkRSS]) {
-        if (!_resource.link) {
-            _resource.link = [NSURL URLWithString:_strXMLString];
+        if (!_resourceLinkLoaded) {
+            _resourceLinkLoaded = YES;
         } else {
             _item.link = [NSURL URLWithString:_strXMLString];
         }
