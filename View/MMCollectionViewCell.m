@@ -9,9 +9,15 @@
 #import "MMCollectionViewCell.h"
 #import "MMRSSItem.h"
 
+@interface MMCollectionViewCell()
+@property BOOL cellUpdated;
+@end
+
 @implementation MMCollectionViewCell
 
 - (void)configureWithItem:(MMRSSItem *)item {
+    self.cellUpdated = YES;
+    
     self.item = item;
     
     self.title.text = item.title;
@@ -22,6 +28,11 @@
 }
 
 - (void)setupImageIfNeeded {
+    if (!self.cellUpdated) {
+        return;
+    }
+    self.cellUpdated = NO;
+    
     if (_item.img) {
         self.picture.image = [UIImage imageWithData:_item.img];
     } else {
