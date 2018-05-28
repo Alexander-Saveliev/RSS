@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		401F7B4A20A87A5400E7D7CD /* MMRSSResourceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */; };
+		404124CF20BBF9120026F602 /* MMRSSPateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 404124CE20BBF9120026F602 /* MMRSSPateViewController.m */; };
 		40436D2220B066F600F9A00E /* NSDate+RFC.m in Sources */ = {isa = PBXBuildFile; fileRef = 40436D2020B066F500F9A00E /* NSDate+RFC.m */; };
 		405DAC2D2090EB2700765199 /* MMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405DAC2C2090EB2700765199 /* MMDetailViewController.m */; };
 		4065B1E420B16E75005F71AC /* DetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4065B1E320B16E75005F71AC /* DetailsViewController.storyboard */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		401F7B4820A87A5400E7D7CD /* MMRSSResourceUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResourceUpdater.h; sourceTree = "<group>"; };
 		401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResourceUpdater.m; sourceTree = "<group>"; };
+		404124CD20BBF9120026F602 /* MMRSSPateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSPateViewController.h; sourceTree = "<group>"; };
+		404124CE20BBF9120026F602 /* MMRSSPateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSPateViewController.m; sourceTree = "<group>"; };
 		40436D2020B066F500F9A00E /* NSDate+RFC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC.m"; sourceTree = "<group>"; };
 		40436D2120B066F500F9A00E /* NSDate+RFC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC.h"; sourceTree = "<group>"; };
 		405DAC2B2090EB2700765199 /* MMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMDetailViewController.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				40C11039208BA19700C34BC4 /* MMRSSViewController.m */,
 				405DAC2B2090EB2700765199 /* MMDetailViewController.h */,
 				405DAC2C2090EB2700765199 /* MMDetailViewController.m */,
+				404124CD20BBF9120026F602 /* MMRSSPateViewController.h */,
+				404124CE20BBF9120026F602 /* MMRSSPateViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				40436D2220B066F600F9A00E /* NSDate+RFC.m in Sources */,
 				40AF049120A819A100F2D346 /* MMRSSItemEntity.m in Sources */,
 				40AF049D20A8293B00F2D346 /* MMRSSItem.m in Sources */,
+				404124CF20BBF9120026F602 /* MMRSSPateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +441,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = MTY.RSS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MTY.RSS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -452,7 +458,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = MTY.RSS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MTY.RSS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

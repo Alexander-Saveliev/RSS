@@ -19,7 +19,6 @@
     return resource;
 }
 
-
 - (void)loadFromEntity:(MMRSSResourceEntity *)resource {
     _title = resource.p_title;
     _url   = resource.p_url;
@@ -30,7 +29,9 @@
         [items addObject:[MMRSSItem makeFromEntity:obj]];
     }];
     
-    _items = items;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pubDate" ascending:NO];
+    
+    _items = [items sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 @end

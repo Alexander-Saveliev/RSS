@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nyw-Xh-bE4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ddG-CQ-vgl">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,26 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="Jo5-Uz-Eh7">
-            <objects>
-                <navigationController id="nyw-Xh-bE4" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Eoh-00-mKr">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="2In-LX-H1x" kind="relationship" relationship="rootViewController" id="g79-oH-BYR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vhh-41-XqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1048" y="220"/>
-        </scene>
-        <!--RSS-->
+        <!--View Controller-->
         <scene sceneID="5y1-fJ-Ugj">
             <objects>
-                <collectionViewController id="2In-LX-H1x" customClass="MMRSSViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="RSSViewController" id="2In-LX-H1x" customClass="MMRSSViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="x6I-VJ-bQj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,14 +76,47 @@
                             <outlet property="delegate" destination="2In-LX-H1x" id="oM6-fh-mBN"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="RSS" id="GOU-MC-68e">
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="BIj-0b-43W"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="T1V-Ea-B6m"/>
-                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6E-EN-0WZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-273.75" y="219.71830985915494"/>
+            <point key="canvasLocation" x="-954" y="220"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6uh-Gi-Gyg">
+            <objects>
+                <navigationController id="ddG-CQ-vgl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Up-gx-ee2">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="o5D-Ly-2Z9" kind="relationship" relationship="rootViewController" id="slL-P8-FdM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1cH-7x-wG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2903" y="220"/>
+        </scene>
+        <!--Паштет-->
+        <scene sceneID="97e-L6-zg4">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Паштет" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="o5D-Ly-2Z9" customClass="MMRSSPateViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nZZ-4O-kos">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="trash" id="1bM-TI-wKg">
+                            <connections>
+                                <action selector="deleteTape:" destination="o5D-Ly-2Z9" id="L5f-ho-sYq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eM5-rc-sCG">
+                            <connections>
+                                <action selector="addUrlButtonWasPressed:" destination="o5D-Ly-2Z9" id="s2W-B1-E5w"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wsw-ao-IfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1928" y="220"/>
         </scene>
     </scenes>
 </document>

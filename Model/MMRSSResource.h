@@ -17,6 +17,6 @@
 @property (readonly) NSString *title;
 @property (readonly) NSURL *url;
 
-@property (readonly) NSMutableArray<MMRSSItem *> *items;
+@property (readonly) NSArray<MMRSSItem *> *items;
 
 @end
