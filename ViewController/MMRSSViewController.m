@@ -23,11 +23,14 @@ static NSString * const showMore        = @"showMore";
 @interface MMRSSViewController () <ImageLoading, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) dispatch_queue_t contentOperationSerialQueue;
-@property BOOL elementSelected;
+@property (nonatomic, assign) BOOL elementSelected;
 
 @end
 
 @implementation MMRSSViewController
+
+@synthesize resource;
+@synthesize pageIndex;
 //- (IBAction)refreshButtonWasPressed:(UIBarButtonItem *)sender {
 //    [self updateWithURL:_tapeLink andBlock:nil];
 //}
@@ -38,7 +41,7 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (void)refreshWasPulled:(UIRefreshControl *)refreshController {
-    [_delegate updateWithURL:_resource.url andBlock:^{
+    [_delegate updateWithURL:resource.url andBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [refreshController endRefreshing];
         });
@@ -62,15 +65,15 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (void)newTapeIsComeingWithUrl:(NSURL *)url {
-    [_delegate fetchContentWithURL:_resource.url successBlock:^(MMRSSResource *resource) {
+    [_delegate fetchContentWithURL:resource.url successBlock:^(MMRSSResource *resource) {
         self.resource = resource;
         [self updateView];
     } failureBlock:^{
         NSLog(@"some error");
     }];
 
-    [_delegate updateWithURL:_resource.url andBlock:^{
-        [self->_delegate fetchContentWithURL:_resource.url successBlock:^(MMRSSResource *resource) {
+    [_delegate updateWithURL:resource.url andBlock:^{
+        [self->_delegate fetchContentWithURL:resource.url successBlock:^(MMRSSResource *resource) {
             self.resource = resource;
            [self updateView];
         } failureBlock:^{
@@ -96,7 +99,7 @@ static NSString * const showMore        = @"showMore";
     [refreshController addTarget:self action:@selector(refreshWasPulled:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshController];
     
-    [self newTapeIsComeingWithUrl:_resource.url];
+    [self newTapeIsComeingWithUrl:resource.url];
 }
 
 #pragma mark - UICollectionViewDataSource -
@@ -106,7 +109,7 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return (_resource.items) ? _resource.items.count : 0;
+    return (resource.items) ? resource.items.count : 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,8 +118,8 @@ static NSString * const showMore        = @"showMore";
     
     cell.delegate = self;
     
-    if (_resource.items[indexPath.row]) {
-        item = _resource.items[indexPath.row];
+    if (resource.items[indexPath.row]) {
+        item = resource.items[indexPath.row];
     } else {
         cell.title.text = @"";
         cell.date.text  = @"";
@@ -166,12 +169,12 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < _resource.items.count && !_elementSelected) {
+    if (indexPath.row < resource.items.count && !_elementSelected) {
         _elementSelected = YES;
         
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"DetailsViewController" bundle:nil];
         MMDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"MMDetailViewController"];
-        vc.item = _resource.items[indexPath.row];
+        vc.item = resource.items[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -5,6 +5,8 @@
 //  Created by Marty on 28/05/2018.
 //  Copyright © 2018 Marty. All rights reserved.
 //
+#import <SCPageViewController.h>
+#import <SCPageLayouter.h>
 
 #import "MMRSSPateViewController.h"
 #import "MMRSSViewController.h"
@@ -14,27 +16,34 @@
 #import "MMRSSResourceEntity.h"
 #import "MMCoreDataStackManager.h"
 #import "MMRSSResource.h"
+#import "MMRSSBaseViewController.h"
 
 static NSString * const urlPlaceholder  = @"URL";
 static NSString * const add             = @"Add tape";
 static NSString * const cancel          = @"Cancel";
 static NSString * const go              = @"Go";
 
-@interface MMRSSPateViewController () <MMTapeUpdater>
+@interface MMRSSPateViewController () <MMTapeUpdater, SCPageViewControllerDataSource>
 
 @property BOOL readyToUpdate;
 @property (nonatomic, strong) MMRSSResourceUpdater *updater;
 @property (nonatomic, strong) dispatch_queue_t contentOperationSerialQueue;
-@property (nonatomic, strong) NSMutableArray<MMRSSViewController *> *views;
-//@property (nonatomic, strong) NSMutableArray<MMRSSResource *> *resources;
+@property (nonatomic, strong) NSMutableArray<MMRSSBaseViewController *> *views;
+@property (nonatomic, strong) SCPageViewController *pageViewController;
+@property (nonatomic, strong) MMRSSBaseViewController *initialVC;
 
 @end
 
 @implementation MMRSSPateViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _pageViewController = [SCPageViewController new];
+    [_pageViewController setDataSource:self];
+    
+    [self.pageViewController setLayouter:[[SCPageLayouter alloc] init] animated:NO completion:nil];
+    
     NSMutableArray *resources = [self.updater fetchAllResources];
     
     _views = [NSMutableArray new];
@@ -44,69 +53,34 @@ static NSString * const go              = @"Go";
         viewController.resource = obj;
         viewController.pageIndex = idx;
         viewController.delegate = self;
+        
+        
         [self.views addObject:viewController];
     }];
     
-    self.readyToUpdate = YES;
-    
-    self.dataSource = self;
-    
     if (!resources.count) {
-        MMRSSResource *firstResource = [MMRSSResource new];
-        
-        MMRSSViewController *initialVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
-        initialVC.resource = firstResource;
-        initialVC.pageIndex = 0;
-        initialVC.delegate = self;
-        [self.views addObject:initialVC];
+        [self.views addObject:[self initialVC]];
     }
     
+    [self addChildViewController:self.pageViewController];
+    [self.pageViewController.view setFrame:self.view.bounds];
+    [self.view addSubview:self.pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
     
-    [self setViewControllers:_views direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    self.readyToUpdate = YES;
 }
 
-- (MMRSSViewController *)viewControllerAtIndex:(NSUInteger)index {
-    if (index >= _views.count) {
+- (NSUInteger)numberOfPagesInPageViewController:(SCPageViewController *)pageViewController {
+    return _views.count;
+}
+
+- (UIViewController *)pageViewController:(SCPageViewController *)pageViewController viewControllerForPageAtIndex:(NSUInteger)pageIndex {
+    if (pageIndex >= _views.count) {
         return nil;
     }
     
-    return _views[index];
-    
-//    if (_views[index]) {
-//        return _views[index];
-//    }
-//
-//    MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
-//    viewController.tapeLink = [NSURL URLWithString:tapes[index]];
-//    viewController.pageIndex = index;
-//    viewController.delegate = self;
-//    [_views addObject:viewController];
-//
-//    return viewController;
+    return _views[pageIndex];
 }
-
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    NSUInteger index = ((MMRSSViewController *)viewController).pageIndex;
-    
-    if (index == 0 || index == NSNotFound) {
-        return nil;
-    }
-    index -= 1;
-    
-    return [self viewControllerAtIndex:index];
-}
-
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    NSUInteger index = ((MMRSSViewController *)viewController).pageIndex;
-    
-    if (index == NSNotFound || index == _views.count - 1) {
-        return nil;
-    }
-    index += 1;
-    
-    return [self viewControllerAtIndex:index];
-}
-
 
 #pragma mark - Action
 
@@ -115,7 +89,7 @@ static NSString * const go              = @"Go";
 
     UIAlertAction* actionGo = [UIAlertAction actionWithTitle:go
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                           if (self.views.count == 1 && !self.views[0].resource.url) {
+                                                           if (!self.views[0].resource) {
                                                                [self.views removeLastObject];
                                                            }
                                                            
@@ -129,8 +103,8 @@ static NSString * const go              = @"Go";
                                                            
                                                            [self.views addObject:viewController];
                                                            
-                                                           [self setViewControllers:self.views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-                                                       }];
+                                                           [self.pageViewController reloadData];
+                                                        }];
 
     UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel
                                                          handler:nil];
@@ -145,42 +119,30 @@ static NSString * const go              = @"Go";
 }
 
 - (IBAction)deleteTape:(UIBarButtonItem *)sender {
-//    UIViewController *currentVc = self.viewControllers.firstObject;
-//    NSUInteger index = currentVc.view.tag;
-//    
-//    if (index >= [tapes count] || index == 0) {
-//        return;
-//    }
-//    
-//    [tapes removeObjectAtIndex:index];
-//    [_views removeObjectAtIndex:index];
-//    
-//    self.dataSource = nil;
-//    self.dataSource = self;
-//    
+    NSUInteger index = [self.pageViewController currentPage];
     
-//    NSMutableArray *arr = self.viewControllers.mutableCopy;
-//    [arr removeObject:currentVc];
-//
-//    if (!arr.count) {
-//        [arr addObject:[UIViewController new]]; //TODO: сделать пустой контроллер (с текстом)
-//        self.dataSource = nil;
-//    }
-//    [self setViewControllers:arr direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
-//
-//    NSURL *url = tapes[index];
-//    if (!url) {
-//        NSLog(@"incorrect url");
-//        return;
-//    }
-//    dispatch_async(self.contentOperationSerialQueue, ^{
-//        @synchronized (self) {
-//            [self->_updater deletaResourceWithUrl:url];
-//            [self->tapes removeObject:url];
-//        }
-//    });
+    if (index >= _views.count) {
+        return;
+    }
+    
+    if (index == 1 && _views.count == 1 && !_views[0].resource.url) {
+        return;
+    }
+    
+    dispatch_async(self.contentOperationSerialQueue, ^{
+        NSURL *url = self.views[index].resource.url;
+        [self->_updater deletaResourceWithUrl:url];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.views removeObjectAtIndex:index];
+            
+            if (!self.views.count) {
+                [self.views addObject:[self initialVC]];
+            }
+            [self.pageViewController reloadData];
+        });
+    });
 }
-
 
 #pragma mark - Delegate
 
@@ -244,6 +206,8 @@ static NSString * const go              = @"Go";
     [_updater updateItemEntity:itemUrl withBlock:block];
 }
 
+#pragma mark - lazy -
+
 - (MMRSSResourceUpdater *)updater {
     if (!_updater) {
         _updater = [MMRSSResourceUpdater new];
@@ -256,6 +220,13 @@ static NSString * const go              = @"Go";
         _contentOperationSerialQueue = dispatch_queue_create("com.mm.imageLoadingSerialQueue", DISPATCH_QUEUE_SERIAL);
     }
     return _contentOperationSerialQueue;
+}
+
+- (MMRSSBaseViewController *)initialVC {
+    if (!_initialVC) {
+        _initialVC = [self.storyboard instantiateViewControllerWithIdentifier:@"EmptyVC"];
+    }
+    return _initialVC;
 }
 
 @end

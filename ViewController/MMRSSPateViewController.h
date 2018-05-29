@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMRSSPateViewController : UIPageViewController <UIPageViewControllerDataSource>
+@interface MMRSSPateViewController : UIViewController
 
 @end

@@ -8,16 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "MMRSSViewController.h"
+#import "MMRSSBaseViewController.h"
 
 @class MMRSSResource;
 @class MMRSSItemEntity;
 
 @protocol MMTapeUpdater;
 
-@interface MMRSSViewController : UICollectionViewController
-
-@property NSUInteger pageIndex;
-@property (nonatomic, strong) MMRSSResource *resource;
+@interface MMRSSViewController: MMRSSBaseViewController
 
 @property (weak, nonatomic) id <MMTapeUpdater> delegate;
 

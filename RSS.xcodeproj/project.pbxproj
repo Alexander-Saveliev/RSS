@@ -23,14 +23,17 @@
 		40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMRSSViewController.m */; };
 		40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */; };
 		40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */; };
+		40DD7E5020BD6DA0005243BE /* MMRSSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DD7E4F20BD6DA0005243BE /* MMRSSBaseViewController.m */; };
 		40E15CE5208BA120001ED7DA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E15CE4208BA120001ED7DA /* AppDelegate.m */; };
 		40E15CEB208BA120001ED7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CE9208BA120001ED7DA /* Main.storyboard */; };
 		40E15CED208BA121001ED7DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CEC208BA121001ED7DA /* Assets.xcassets */; };
 		40E15CF0208BA121001ED7DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E15CEE208BA121001ED7DA /* LaunchScreen.storyboard */; };
 		40E15CF3208BA121001ED7DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E15CF2208BA121001ED7DA /* main.m */; };
+		BDE2F7508E13B9C672182A3C /* libPods-RSS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE0E3BE5FEEE619AB235F88 /* libPods-RSS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BE0E3BE5FEEE619AB235F88 /* libPods-RSS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RSS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401F7B4820A87A5400E7D7CD /* MMRSSResourceUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSResourceUpdater.h; sourceTree = "<group>"; };
 		401F7B4920A87A5400E7D7CD /* MMRSSResourceUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSResourceUpdater.m; sourceTree = "<group>"; };
 		404124CD20BBF9120026F602 /* MMRSSPateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSPateViewController.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 		40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
 		40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewCell.m; sourceTree = "<group>"; };
 		40C332C5209ACC0A00DF511C /* RSS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSS.xcdatamodel; sourceTree = "<group>"; };
+		40DD7E4E20BD6DA0005243BE /* MMRSSBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSBaseViewController.h; sourceTree = "<group>"; };
+		40DD7E4F20BD6DA0005243BE /* MMRSSBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSBaseViewController.m; sourceTree = "<group>"; };
 		40E15CE0208BA120001ED7DA /* RSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E15CE3208BA120001ED7DA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		40E15CE4208BA120001ED7DA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,6 +77,8 @@
 		40E15CF1208BA121001ED7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E15CF2208BA121001ED7DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		40FAF0AD20A0D0C2000960F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		889BD35938DEA85A8FF42247 /* Pods-RSS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSS/Pods-RSS.debug.xcconfig"; sourceTree = "<group>"; };
+		C5802D41F4B77DE2222D544A /* Pods-RSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSS/Pods-RSS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDE2F7508E13B9C672182A3C /* libPods-RSS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +136,8 @@
 				40E15CF9208BA12A001ED7DA /* ViewController */,
 				40E15CE2208BA120001ED7DA /* RSS */,
 				40E15CE1208BA120001ED7DA /* Products */,
+				B1137A72C7A017CB57E95906 /* Pods */,
+				4706EACB4896E807BABF7FFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +171,8 @@
 				405DAC2C2090EB2700765199 /* MMDetailViewController.m */,
 				404124CD20BBF9120026F602 /* MMRSSPateViewController.h */,
 				404124CE20BBF9120026F602 /* MMRSSPateViewController.m */,
+				40DD7E4E20BD6DA0005243BE /* MMRSSBaseViewController.h */,
+				40DD7E4F20BD6DA0005243BE /* MMRSSBaseViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -169,12 +181,12 @@
 			isa = PBXGroup;
 			children = (
 				40E15CE9208BA120001ED7DA /* Main.storyboard */,
-				40E15CEC208BA121001ED7DA /* Assets.xcassets */,
+				4065B1E320B16E75005F71AC /* DetailsViewController.storyboard */,
 				40E15CEE208BA121001ED7DA /* LaunchScreen.storyboard */,
+				40E15CEC208BA121001ED7DA /* Assets.xcassets */,
 				408540F920A0CCBD0076146A /* Localizable.strings */,
 				40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */,
 				40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */,
-				4065B1E320B16E75005F71AC /* DetailsViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +206,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4706EACB4896E807BABF7FFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0E3BE5FEEE619AB235F88 /* libPods-RSS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1137A72C7A017CB57E95906 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				889BD35938DEA85A8FF42247 /* Pods-RSS.debug.xcconfig */,
+				C5802D41F4B77DE2222D544A /* Pods-RSS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -201,6 +230,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40E15CF6208BA121001ED7DA /* Build configuration list for PBXNativeTarget "RSS" */;
 			buildPhases = (
+				1DBE7DB1527A79B0D1007F73 /* [CP] Check Pods Manifest.lock */,
 				40E15CDC208BA120001ED7DA /* Sources */,
 				40E15CDD208BA120001ED7DA /* Frameworks */,
 				40E15CDE208BA120001ED7DA /* Resources */,
@@ -263,6 +293,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1DBE7DB1527A79B0D1007F73 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RSS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		40E15CDC208BA120001ED7DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,6 +322,7 @@
 				40E15CF3208BA121001ED7DA /* main.m in Sources */,
 				401F7B4A20A87A5400E7D7CD /* MMRSSResourceUpdater.m in Sources */,
 				40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */,
+				40DD7E5020BD6DA0005243BE /* MMRSSBaseViewController.m in Sources */,
 				40AF049A20A81A7200F2D346 /* MMRSSResourceEntity.m in Sources */,
 				40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */,
 				40AF04A520A832F700F2D346 /* MMNetworkTask.m in Sources */,
@@ -432,6 +484,7 @@
 		};
 		40E15CF7208BA121001ED7DA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 889BD35938DEA85A8FF42247 /* Pods-RSS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -449,6 +502,7 @@
 		};
 		40E15CF8208BA121001ED7DA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5802D41F4B77DE2222D544A /* Pods-RSS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
