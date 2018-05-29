@@ -17,7 +17,7 @@
 @interface MMRSSViewController : UICollectionViewController
 
 @property NSUInteger pageIndex;
-@property (nonatomic, strong) NSURL *tapeLink;
+@property (nonatomic, strong) MMRSSResource *resource;
 
 @property (weak, nonatomic) id <MMTapeUpdater> delegate;
 

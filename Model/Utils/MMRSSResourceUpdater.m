@@ -75,7 +75,7 @@
     
     NSFetchRequest<MMRSSResourceEntity *> *requestForURL = [MMRSSResourceEntity fetchRequest];
     NSArray<MMRSSResourceEntity *> *resultWithURL = [context executeFetchRequest:requestForURL error:nil];
-    NSMutableArray<MMRSSResource *> *storedResources;
+    NSMutableArray<MMRSSResource *> *storedResources = [NSMutableArray new];
     
     [resultWithURL enumerateObjectsUsingBlock:^(MMRSSResourceEntity * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [storedResources addObject:[MMRSSResource makeFromEntity:obj]];

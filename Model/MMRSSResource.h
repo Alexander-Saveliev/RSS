@@ -15,7 +15,7 @@
 + (id)makeFromEntity:(MMRSSResourceEntity *)reesource;
 
 @property (readonly) NSString *title;
-@property (readonly) NSURL *url;
+@property NSURL *url;
 
 @property (readonly) NSArray<MMRSSItem *> *items;
 

@@ -20,15 +20,13 @@ static NSString * const add             = @"Add tape";
 static NSString * const cancel          = @"Cancel";
 static NSString * const go              = @"Go";
 
-@interface MMRSSPateViewController () <MMTapeUpdater> {
-    NSMutableArray<NSString *> *tapes;
-}
+@interface MMRSSPateViewController () <MMTapeUpdater>
 
 @property BOOL readyToUpdate;
 @property (nonatomic, strong) MMRSSResourceUpdater *updater;
 @property (nonatomic, strong) dispatch_queue_t contentOperationSerialQueue;
 @property (nonatomic, strong) NSMutableArray<MMRSSViewController *> *views;
-@property (nonatomic, strong) NSMutableArray<MMRSSResource *> *resources;
+//@property (nonatomic, strong) NSMutableArray<MMRSSResource *> *resources;
 
 @end
 
@@ -37,33 +35,54 @@ static NSString * const go              = @"Go";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    tapes = [NSMutableArray arrayWithObject:@"https://lenta.ru/rss/news"];
+    NSMutableArray *resources = [self.updater fetchAllResources];
+    
+    _views = [NSMutableArray new];
+    
+    [resources enumerateObjectsUsingBlock:^(MMRSSResource * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
+        viewController.resource = obj;
+        viewController.pageIndex = idx;
+        viewController.delegate = self;
+        [self.views addObject:viewController];
+    }];
     
     self.readyToUpdate = YES;
     
     self.dataSource = self;
-    MMRSSViewController *initialVC = (MMRSSViewController *)[self viewControllerAtIndex:0];
-    NSArray *viewControllers = [NSArray arrayWithObject:initialVC];
     
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    if (!resources.count) {
+        MMRSSResource *firstResource = [MMRSSResource new];
+        
+        MMRSSViewController *initialVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
+        initialVC.resource = firstResource;
+        initialVC.pageIndex = 0;
+        initialVC.delegate = self;
+        [self.views addObject:initialVC];
+    }
+    
+    
+    [self setViewControllers:_views direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (MMRSSViewController *)viewControllerAtIndex:(NSUInteger)index {
-    if (index >= tapes.count) {
+    if (index >= _views.count) {
         return nil;
     }
     
-    if (_views[index]) {
-        return _views[index];
-    }
+    return _views[index];
     
-    MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
-    viewController.tapeLink = [NSURL URLWithString:tapes[index]];
-    viewController.pageIndex = index;
-    viewController.delegate = self;
-    [_views addObject:viewController];
-    
-    return viewController;
+//    if (_views[index]) {
+//        return _views[index];
+//    }
+//
+//    MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
+//    viewController.tapeLink = [NSURL URLWithString:tapes[index]];
+//    viewController.pageIndex = index;
+//    viewController.delegate = self;
+//    [_views addObject:viewController];
+//
+//    return viewController;
 }
 
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
@@ -80,7 +99,7 @@ static NSString * const go              = @"Go";
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSUInteger index = ((MMRSSViewController *)viewController).pageIndex;
     
-    if (index == NSNotFound || index == tapes.count - 1) {
+    if (index == NSNotFound || index == _views.count - 1) {
         return nil;
     }
     index += 1;
@@ -93,40 +112,52 @@ static NSString * const go              = @"Go";
 
 - (IBAction)addUrlButtonWasPressed:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(add, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
+
     UIAlertAction* actionGo = [UIAlertAction actionWithTitle:go
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                           [self->tapes addObject:alertVC.textFields[0].text];
-                                                           self.dataSource = nil;
-                                                           self.dataSource = self;
+                                                           if (self.views.count == 1 && !self.views[0].resource.url) {
+                                                               [self.views removeLastObject];
+                                                           }
+                                                           
+                                                           MMRSSResource *newResource = [MMRSSResource new];
+                                                           newResource.url = [NSURL URLWithString:alertVC.textFields[0].text];
+                                                           
+                                                           MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
+                                                           viewController.resource = newResource;
+                                                           viewController.pageIndex = self.views.count;
+                                                           viewController.delegate = self;
+                                                           
+                                                           [self.views addObject:viewController];
+                                                           
+                                                           [self setViewControllers:self.views direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
                                                        }];
-    
+
     UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel
                                                          handler:nil];
-    
+
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = urlPlaceholder;
     }];
-    
+
     [alertVC addAction:actionGo];
     [alertVC addAction:actionCancel];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (IBAction)deleteTape:(UIBarButtonItem *)sender {
-    UIViewController *currentVc = self.viewControllers.firstObject;
-    NSUInteger index = currentVc.view.tag;
-    
-    if (index >= [tapes count] || index == 0) {
-        return;
-    }
-    
-    [tapes removeObjectAtIndex:index];
-    [_views removeObjectAtIndex:index];
-    
-    self.dataSource = nil;
-    self.dataSource = self;
-    
+//    UIViewController *currentVc = self.viewControllers.firstObject;
+//    NSUInteger index = currentVc.view.tag;
+//    
+//    if (index >= [tapes count] || index == 0) {
+//        return;
+//    }
+//    
+//    [tapes removeObjectAtIndex:index];
+//    [_views removeObjectAtIndex:index];
+//    
+//    self.dataSource = nil;
+//    self.dataSource = self;
+//    
     
 //    NSMutableArray *arr = self.viewControllers.mutableCopy;
 //    [arr removeObject:currentVc];

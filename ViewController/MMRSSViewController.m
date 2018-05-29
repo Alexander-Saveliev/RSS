@@ -24,7 +24,6 @@ static NSString * const showMore        = @"showMore";
 
 @property (nonatomic, strong) dispatch_queue_t contentOperationSerialQueue;
 @property BOOL elementSelected;
-@property (nonatomic, strong) MMRSSResource *resource;
 
 @end
 
@@ -39,7 +38,7 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (void)refreshWasPulled:(UIRefreshControl *)refreshController {
-    [_delegate updateWithURL:_tapeLink andBlock:^{
+    [_delegate updateWithURL:_resource.url andBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [refreshController endRefreshing];
         });
@@ -63,15 +62,15 @@ static NSString * const showMore        = @"showMore";
 }
 
 - (void)newTapeIsComeingWithUrl:(NSURL *)url {
-    [_delegate fetchContentWithURL:_tapeLink successBlock:^(MMRSSResource *resource) {
+    [_delegate fetchContentWithURL:_resource.url successBlock:^(MMRSSResource *resource) {
         self.resource = resource;
         [self updateView];
     } failureBlock:^{
         NSLog(@"some error");
     }];
 
-    [_delegate updateWithURL:_tapeLink andBlock:^{
-        [self->_delegate fetchContentWithURL:_tapeLink successBlock:^(MMRSSResource *resource) {
+    [_delegate updateWithURL:_resource.url andBlock:^{
+        [self->_delegate fetchContentWithURL:_resource.url successBlock:^(MMRSSResource *resource) {
             self.resource = resource;
            [self updateView];
         } failureBlock:^{
@@ -92,12 +91,12 @@ static NSString * const showMore        = @"showMore";
     
     UIRefreshControl *refreshController = [UIRefreshControl new];
     
-    refreshController.backgroundColor = [UIColor redColor];
-    refreshController.tintColor       = [UIColor whiteColor];
+    refreshController.backgroundColor = [UIColor whiteColor];
+    refreshController.tintColor       = [UIColor grayColor];
     [refreshController addTarget:self action:@selector(refreshWasPulled:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshController];
     
-    [self newTapeIsComeingWithUrl:_tapeLink];
+    [self newTapeIsComeingWithUrl:_resource.url];
 }
 
 #pragma mark - UICollectionViewDataSource -
