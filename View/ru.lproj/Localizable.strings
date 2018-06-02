@@ -6,4 +6,6 @@
   Copyright © 2018 Marty. All rights reserved.
 */
 
-"Add tape" = "Добавить ленту";
+"ADD_TAPE" = "Добавить ленту";
+
+"INTERNET_CONNECTION_LOST" = "Соединение с интернетом потеряно";

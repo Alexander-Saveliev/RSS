@@ -24,7 +24,7 @@
     self.date.text  = [NSDateFormatter localizedStringFromDate:item.pubDate
                                                      dateStyle:NSDateFormatterShortStyle
                                                      timeStyle:NSDateFormatterFullStyle];
-    self.picture.image = (_item.img) ? [UIImage imageWithData:_item.img] : [UIImage imageNamed:@"Marty"];
+    self.picture.image = (_item.img) ? [UIImage imageWithData:_item.img] : [UIImage imageNamed:@"no_image"];
 }
 
 - (void)setupImageIfNeeded {
@@ -37,7 +37,7 @@
         self.picture.image = [UIImage imageWithData:_item.img];
     } else {
         [_delegate loadImageData:_item successBlock:^(NSData *data) {
-            self.picture.image = (data) ? [UIImage imageWithData:data] : [UIImage imageNamed:@"Marty"];
+            self.picture.image = (data) ? [UIImage imageWithData:data] : [UIImage imageNamed:@"no_image"];
         }];
     }
 }

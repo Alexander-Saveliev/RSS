@@ -20,6 +20,7 @@
 		40AF04A020A82BE000F2D346 /* MMRSSResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF049F20A82BE000F2D346 /* MMRSSResource.m */; };
 		40AF04A520A832F700F2D346 /* MMNetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF04A420A832F700F2D346 /* MMNetworkTask.m */; };
 		40AF04A820A8618000F2D346 /* MMRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AF04A720A8618000F2D346 /* MMRSSParser.m */; };
+		40BE463420C2DBF0005171B2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BE463220C2DBF0005171B2 /* Reachability.m */; };
 		40C1103A208BA19700C34BC4 /* MMRSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C11039208BA19700C34BC4 /* MMRSSViewController.m */; };
 		40C1103D208BA23C00C34BC4 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C1103C208BA23C00C34BC4 /* MMCollectionViewCell.m */; };
 		40C332C6209ACC0A00DF511C /* RSS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40C332C4209ACC0A00DF511C /* RSS.xcdatamodeld */; };
@@ -61,6 +62,8 @@
 		40AF04A720A8618000F2D346 /* MMRSSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSParser.m; sourceTree = "<group>"; };
 		40AF04A920A8659000F2D346 /* MMRSSXMLResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSXMLResource.h; sourceTree = "<group>"; };
 		40AF04AB20A8679300F2D346 /* MMRSSXMLItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSXMLItem.h; sourceTree = "<group>"; };
+		40BE463220C2DBF0005171B2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		40BE463320C2DBF0005171B2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		40C11038208BA19700C34BC4 /* MMRSSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMRSSViewController.h; sourceTree = "<group>"; };
 		40C11039208BA19700C34BC4 /* MMRSSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMRSSViewController.m; sourceTree = "<group>"; };
 		40C1103B208BA23C00C34BC4 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
@@ -128,9 +131,20 @@
 			path = ResponseParser;
 			sourceTree = "<group>";
 		};
+		40BE463120C2DBF0005171B2 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				40BE463220C2DBF0005171B2 /* Reachability.m */,
+				40BE463320C2DBF0005171B2 /* Reachability.h */,
+			);
+			name = Libs;
+			path = "../Objective-C/RSS/Libs";
+			sourceTree = "<group>";
+		};
 		40E15CD7208BA120001ED7DA = {
 			isa = PBXGroup;
 			children = (
+				40BE463120C2DBF0005171B2 /* Libs */,
 				40E15CFB208BA13A001ED7DA /* Model */,
 				40E15CFA208BA133001ED7DA /* View */,
 				40E15CF9208BA12A001ED7DA /* ViewController */,
@@ -335,6 +349,7 @@
 				40436D2220B066F600F9A00E /* NSDate+RFC.m in Sources */,
 				40AF049120A819A100F2D346 /* MMRSSItemEntity.m in Sources */,
 				40AF049D20A8293B00F2D346 /* MMRSSItem.m in Sources */,
+				40BE463420C2DBF0005171B2 /* Reachability.m in Sources */,
 				404124CF20BBF9120026F602 /* MMRSSPateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

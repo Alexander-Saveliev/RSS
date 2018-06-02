@@ -56,6 +56,7 @@ static NSString * const showMore        = @"showMore";
         if (!strongSelf) {
             return;
         }
+        [strongSelf.collectionView.backgroundView setHidden:YES];
         [strongSelf.collectionView reloadData];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -72,8 +73,8 @@ static NSString * const showMore        = @"showMore";
         NSLog(@"some error");
     }];
 
-    [_delegate updateWithURL:resource.url andBlock:^{
-        [self->_delegate fetchContentWithURL:resource.url successBlock:^(MMRSSResource *resource) {
+    [_delegate updateWithURL:self.resource.url andBlock:^{
+        [self->_delegate fetchContentWithURL:self.resource.url successBlock:^(MMRSSResource *resource) {
             self.resource = resource;
            [self updateView];
         } failureBlock:^{
@@ -94,18 +95,35 @@ static NSString * const showMore        = @"showMore";
     
     UIRefreshControl *refreshController = [UIRefreshControl new];
     
-    refreshController.backgroundColor = [UIColor whiteColor];
+    refreshController.backgroundColor = [UIColor clearColor];
     refreshController.tintColor       = [UIColor grayColor];
     [refreshController addTarget:self action:@selector(refreshWasPulled:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshController];
     
     [self newTapeIsComeingWithUrl:resource.url];
+    
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
 #pragma mark - UICollectionViewDataSource -
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1; //TODO: Budet 4to-to
+    if (resource.items) {
+        return 1;
+    } else {
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        [messageLabel sizeToFit];
+        
+        self.collectionView.backgroundView = messageLabel;
+    }
+    
+    return 0;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -155,7 +173,7 @@ static NSString * const showMore        = @"showMore";
         item.img = imgData;
         
         if (imgData) {
-            [_delegate updateItemEntity:item.link withBlock:^(MMRSSItemEntity *item) {
+            [self->_delegate updateItemEntity:item.link withBlock:^(MMRSSItemEntity *item) {
                 item.p_img = imgData;
             }];
         }

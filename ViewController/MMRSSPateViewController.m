@@ -7,6 +7,8 @@
 //
 #import <SCPageViewController.h>
 #import <SCPageLayouter.h>
+#import <Foundation/Foundation.h>
+#import "Reachability.h"
 
 #import "MMRSSPateViewController.h"
 #import "MMRSSViewController.h"
@@ -19,7 +21,6 @@
 #import "MMRSSBaseViewController.h"
 
 static NSString * const urlPlaceholder  = @"URL";
-static NSString * const add             = @"Add tape";
 static NSString * const cancel          = @"Cancel";
 static NSString * const go              = @"Go";
 
@@ -28,6 +29,7 @@ static NSString * const go              = @"Go";
 @property BOOL readyToUpdate;
 @property (nonatomic, strong) MMRSSResourceUpdater *updater;
 @property (nonatomic, strong) dispatch_queue_t contentOperationSerialQueue;
+@property (weak, nonatomic) IBOutlet UINavigationItem *deleteButton;
 @property (nonatomic, strong) NSMutableArray<MMRSSBaseViewController *> *views;
 @property (nonatomic, strong) SCPageViewController *pageViewController;
 @property (nonatomic, strong) MMRSSBaseViewController *initialVC;
@@ -68,6 +70,9 @@ static NSString * const go              = @"Go";
     [self.pageViewController didMoveToParentViewController:self];
     
     self.readyToUpdate = YES;
+    
+    
+    self->_deleteButton.leftBarButtonItem.enabled = self.views[0].resource;
 }
 
 - (NSUInteger)numberOfPagesInPageViewController:(SCPageViewController *)pageViewController {
@@ -82,19 +87,45 @@ static NSString * const go              = @"Go";
     return _views[pageIndex];
 }
 
+- (void)showAlertWithTitle:(NSString *)title {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(title, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* actionCancel = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    
+    [alertVC addAction:actionCancel];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
 #pragma mark - Action
 
 - (IBAction)addUrlButtonWasPressed:(UIBarButtonItem *)sender {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(add, nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"ADD_TAPE", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* actionGo = [UIAlertAction actionWithTitle:go
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                           NSURL *urlResource = [NSURL URLWithString:alertVC.textFields[0].text];
+                                                           
+                                                           for (NSUInteger i = 0; i < self.views.count; i++) {
+                                                               if ([self.views[i].resource.url isEqual:urlResource]) {
+                                                                   [self showAlertWithTitle:@"resource already exists"];
+                                                                   return;
+                                                               }
+                                                           }
+                                                           
+                                                           Reachability *reachability = [Reachability reachabilityForInternetConnection];
+                                                           
+                                                           if (![reachability isReachable]) {
+                                                               [self showAlertWithTitle:NSLocalizedString(@"INTERNET_CONNECTION_LOST", nil)];
+                                                               return;
+                                                           }
+
                                                            if (!self.views[0].resource) {
                                                                [self.views removeLastObject];
                                                            }
                                                            
                                                            MMRSSResource *newResource = [MMRSSResource new];
-                                                           newResource.url = [NSURL URLWithString:alertVC.textFields[0].text];
+                                                           newResource.url = urlResource;
                                                            
                                                            MMRSSViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RSSViewController"];
                                                            viewController.resource = newResource;
@@ -102,6 +133,8 @@ static NSString * const go              = @"Go";
                                                            viewController.delegate = self;
                                                            
                                                            [self.views addObject:viewController];
+                                                           
+                                                           self->_deleteButton.leftBarButtonItem.enabled = self.views[0].resource;
                                                            
                                                            [self.pageViewController reloadData];
                                                         }];
@@ -140,6 +173,8 @@ static NSString * const go              = @"Go";
                 [self.views addObject:[self initialVC]];
             }
             [self.pageViewController reloadData];
+            
+            self->_deleteButton.leftBarButtonItem.enabled = self.views[0].resource;
         });
     });
 }
